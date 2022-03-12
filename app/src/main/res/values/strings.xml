@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">weather app</string>
+    <string name="title_home">Home page</string>
+    <string name="title_welcome">Welcome</string>
+    <string name="first_time_welcome_phrase">welcome, this application helps you to know the weather minute by minute</string>
+    <string name="next">Next</string>
+    <string name="location_pick_instruction">you will need to specifiy your location so as show the weather of your location</string>
+    <string name="get_weather_by_location">get weather by location</string>
+    <string name="get_weather_by_map">get weather by map</string>
+    <string name="get_weather_by_city">get weather by map</string>
 </resources>

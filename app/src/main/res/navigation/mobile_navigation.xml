@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_welcome">
+
+<!--    this action for test purposal only it can be deleted safe-->
+    <fragment
+        android:id="@+id/navigation_welcome"
+        android:name="eg.iti.weatherapp.main.ui.welcome.WelcomeFragment"
+        android:label="@string/title_welcome"
+        tools:layout="@layout/welcome_fragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_welcome_to_picklocation"-->
+<!--            app:destination="@id/navigation_pickLocation"-->
+<!--            app:launchSingleTop="true"-->
+<!--            app:popUpTo="@id/navigation_welcome"-->
+<!--            app:popUpToInclusive="true" />-->
+<!--    </fragment>-->
+
+    <fragment
+        android:id="@+id/navigation_pickLocation"
+        android:name="eg.iti.weatherapp.main.ui.location.PickLocationFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/pick_location_fragment" >
+            <action
+                android:id="@+id/action_pick_to_home"
+                app:destination="@id/navigation_home"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/navigation_welcome"
+                app:popUpToInclusive="true" />
+        </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:label="@string/title_home"
+        tools:layout="@layout/home_fragment" />
+
+
+
+</navigation>
