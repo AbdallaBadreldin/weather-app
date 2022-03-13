@@ -4,5 +4,6 @@
     <string name="shared_pref_file">kotlinsharedpreference</string>
     <string name="longitude">longitude_preference</string>
     <string name="alatitude">alatitude_preference</string>
+    <string name="weather_api">6bfac4a32ea2220f97cade47d4ac244b</string>
 
 </resources>
