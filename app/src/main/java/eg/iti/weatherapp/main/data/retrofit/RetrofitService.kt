@@ -11,9 +11,11 @@ interface RetrofitService {
 //    &lang={lang}  ar - en
 //    &unit={unit}  standard - metric - imperial
 
-//    exclude
-    @GET("onecall?")
-    fun getCurrentByLocation(@Query("lat")lat:String, @Query("lon")lon:String, @Query("unit")unit:String, @Query("lang")lang:String, @Query("appid")API :String) : Call<WeatherResponse>
+//    Temperature. Units - default: kelvin, metric: Celsius, imperial: Fahrenheit.
+
+//    exclude=hourly,daily ,minutly
+    @GET("onecall?exclude=minutely")
+    fun getCurrentByLocation(@Query("lat")lat:String, @Query("lon")lon:String, @Query("units")unit:String, @Query("lang")lang:String, @Query("appid")API :String) : Call<WeatherResponse>
 
 
 //    @GET("movielist.json")

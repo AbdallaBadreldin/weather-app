@@ -14,4 +14,6 @@
     <string name="wind">wind</string>
     <string name="humidity">humidity</string>
     <string name="pressure">pressure</string>
+
+
 </resources>

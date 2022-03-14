@@ -1,6 +1,8 @@
 package eg.iti.weatherapp.main.data.model
 
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import eg.iti.weatherapp.main.data.repository.database.Converters
 import java.io.Serializable
 
 data class Current constructor(
@@ -28,6 +30,7 @@ data class Current constructor(
     @SerializedName("clouds")
     val cloud :String,
 
+//    @TypeConverters(Converters::class)
     @SerializedName("weather")
     val weather :List<Weather>
 

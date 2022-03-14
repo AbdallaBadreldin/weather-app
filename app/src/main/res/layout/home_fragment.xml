@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homeSwipeContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -19,7 +19,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
-
 
         <TextView
             android:id="@+id/timezone"
@@ -44,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="16dp"
+            app:cardCornerRadius="90dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="156dp">
 
@@ -51,38 +51,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_margin="16dp"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/weather_discription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:padding="8dp" />
 
                 <TextView
                     android:id="@+id/temp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <ImageView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    tools:layout_editor_absoluteX="128dp"
+                    tools:layout_editor_absoluteY="217dp"
+                    tools:src="@tools:sample/avatars" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/weatherIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            tools:layout_editor_absoluteX="128dp"
-            tools:layout_editor_absoluteY="217dp"
-            tools:src="@tools:sample/avatars" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="436dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="90dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="458dp">
 

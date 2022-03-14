@@ -14,8 +14,10 @@ class HomeFragmemntViewModel(private val mainRepository: MainRepository) : ViewM
     val errorMessage = MutableLiveData<String>()
 
     fun getCurrentWeather(){
+//    &lang={lang}  ar - en
+//    &unit={unit}  standard - metric - imperial
 
-      val response = mainRepository.getCurrentWeatherByLocation("33.44","-94.04","standard","en","6bfac4a32ea2220f97cade47d4ac244b")
+      val response = mainRepository.getCurrentWeatherByLocation("33.44","-94.04","metric","en","6bfac4a32ea2220f97cade47d4ac244b")
         response.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 currentWeather.postValue(response.body())

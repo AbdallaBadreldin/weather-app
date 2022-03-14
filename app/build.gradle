@@ -39,6 +39,7 @@ dependencies {
 //    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
 //    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
     def nav_version = "2.4.1"
 
     // Java language implementation
@@ -80,6 +81,13 @@ dependencies {
     // swipe
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+
+    // Room components
+    def room_version = "2.4.1"
+    implementation "androidx.room:room-common:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
