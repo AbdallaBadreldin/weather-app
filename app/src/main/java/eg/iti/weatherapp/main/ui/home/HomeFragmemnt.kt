@@ -1,21 +1,29 @@
 package eg.iti.weatherapp.main.ui.home
 
+import android.R
 import android.content.ClipDescription
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.ImageView
+import android.widget.LinearLayout.HORIZONTAL
+import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import eg.iti.weatherapp.databinding.HomeFragmentBinding
 import eg.iti.weatherapp.main.data.database.LocalSource
+import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
@@ -53,6 +61,9 @@ class HomeFragmemnt : Fragment() {
     lateinit var imgWeatherIcon :ImageView
 
 
+
+    val dailyAdapter = DailyAdapter()
+    val hourlyAdapter = HourlyAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +77,19 @@ class HomeFragmemnt : Fragment() {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
+    binding.dailyRecyclerView.apply {
+        layoutManager = LinearLayoutManager(activity)
+        adapter = dailyAdapter
+    }
+
+    binding.hourlyRecyclerView.apply {
+        layoutManager = LinearLayoutManager(activity)
+        (layoutManager as LinearLayoutManager).orientation =RecyclerView.HORIZONTAL
+        adapter = hourlyAdapter
+    }
+
         bindLayoutComponents()
 
         //swipe things
@@ -76,10 +100,11 @@ class HomeFragmemnt : Fragment() {
         fetchTimelineAsync()
 
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-            android.R.color.holo_green_light,
-            android.R.color.holo_orange_light,
-            android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(
+            R.color.holo_blue_bright,
+            R.color.holo_green_light,
+            R.color.holo_orange_light,
+            R.color.holo_red_light);
 
 
         return root
@@ -120,6 +145,13 @@ class HomeFragmemnt : Fragment() {
             txtCloud.text = it.current.cloud
             txtUltraViolet.text = it.current.ultraViolet
             txtVisibility.text = it.current.visibility
+
+            //update adapters adapter
+            dailyAdapter.setDailyList(it.daily)
+            dailyAdapter.notifyDataSetChanged()
+
+            hourlyAdapter.setHourlyListItems(it.hourly)
+            hourlyAdapter.notifyDataSetChanged()
 
             swipeContainer.setRefreshing(false)
         }

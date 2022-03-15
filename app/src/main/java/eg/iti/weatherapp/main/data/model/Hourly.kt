@@ -15,7 +15,7 @@ data class Hourly(
     @SerializedName("feels_like")
     val feels_like :String,
 
-//    @TypeConverters(Converters::class)
+    @TypeConverters(Converters::class)
     @SerializedName("weather")
     val weather: List<Weather>
 ): Serializable

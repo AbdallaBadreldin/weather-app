@@ -30,7 +30,7 @@ data class Current constructor(
     @SerializedName("clouds")
     val cloud :String,
 
-//    @TypeConverters(Converters::class)
+    @TypeConverters(Converters::class)
     @SerializedName("weather")
     val weather :List<Weather>
 

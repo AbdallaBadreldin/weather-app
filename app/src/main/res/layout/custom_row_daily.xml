@@ -5,25 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:layout_margin="8dp"
     android:padding="8dp"
-    app:cardCornerRadius="90dp">
+    app:cardCornerRadius="90dp"
+    app:layout_anchorGravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/daily_day"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="sat or tommorow" />
 
         <ImageView
             android:id="@+id/daily_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -31,12 +37,16 @@
             android:id="@+id/daily_dec"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="clear sky" />
 
         <TextView
             android:id="@+id/daily_deg_feel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="23/13c" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

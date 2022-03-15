@@ -13,7 +13,7 @@ data class Daily(
     @SerializedName("temp")
     val temp : Temp,
 
-//    @TypeConverters(Converters::class)
+    @TypeConverters(Converters::class)
     @SerializedName("weather")
     val weather: List<Weather>
     ): Serializable

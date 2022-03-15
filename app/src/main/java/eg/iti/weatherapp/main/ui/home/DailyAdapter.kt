@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import eg.iti.weatherapp.databinding.CustomRowDailyBinding
+import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.ui.home.DailyAdapter
 
 class DailyAdapter: RecyclerView.Adapter<MainViewHolder>() {
 
-    var movies = mutableListOf<Daily>()
+     var dailys : List<Daily> =mutableListOf<Daily>()
 
-    fun setDailyList(movies: List<Daily>) {
-        this.movies = movies.toMutableList()
-        notifyDataSetChanged()
+    fun setDailyList(dailys: List<Daily>) {
+        this.dailys = dailys
+//        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -26,17 +27,18 @@ class DailyAdapter: RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-//        val movie = movies[position]
-//        holder.binding.name.text = movie.name
-//        Glide.with(holder.itemView.context).load(movie.imageUrl).into(holder.binding.imageview)
-
+        val weatherDetail = dailys[position]
+//        holder.binding.dailyDay
+        holder.binding.dailyDec.text= weatherDetail.weather[0].description
+        holder.binding.dailyDegFeel.text= "${weatherDetail.temp.max} / ${weatherDetail.temp.min}"
+//        holder.binding.dailyImage
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        if (dailys==null)
+            return 0
+        return dailys.size
     }
 }
 
-class MainViewHolder(val binding: CustomRowDailyBinding) : RecyclerView.ViewHolder(binding.root) {
-
-}
+class MainViewHolder(val binding: CustomRowDailyBinding) : RecyclerView.ViewHolder(binding.root)
