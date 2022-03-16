@@ -38,6 +38,32 @@
         android:label="@string/title_home"
         tools:layout="@layout/home_fragment" />
 
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="eg.iti.weatherapp.main.ui.settings.SettingsFragment"
+        android:label="@string/setting"
+        tools:layout="@layout/settings_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="eg.iti.weatherapp.main.ui.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/home_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_alert"
+        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:label="@string/alert"
+        tools:layout="@layout/home_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_favourite"
+        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:label="@string/favourite"
+        tools:layout="@layout/home_fragment" />
+
+
+
 
 
 </navigation>

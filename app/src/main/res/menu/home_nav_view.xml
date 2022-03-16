@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+android:id="@+id/home_drawer_menu"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:checked="true">
+        <!--        <item-->
+        <!--            android:id="@+id/nav_home"-->
+        <!--            android:icon="@drawable/ic_menu_camera"-->
+        <!--            android:title="@string/menu_home" />-->
+        <!--        <item-->
+        <!--            android:id="@+id/nav_gallery"-->
+        <!--            android:icon="@drawable/ic_menu_gallery"-->
+        <!--            android:title="@string/menu_gallery" />-->
+        <!--        <item-->
+        <!--            android:id="@+id/nav_slideshow"-->
+        <!--            android:icon="@drawable/ic_menu_slideshow"-->
+        <!--            android:title="@string/menu_slideshow" />-->
+
+        <!--        <item-->
+        <!--            android:id="@+id/text1"-->
+        <!--            android:title="@string/profile" />-->
+
+        <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/navigation_favourite"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="@string/favourite" />
+
+
+        <item
+            android:id="@+id/navigation_notification"
+            android:icon="@drawable/ic_baseline_notifications_24"
+            android:title="@string/alert" />
+
+        <item
+            android:id="@+id/navigation_setting"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/setting" />
+
+        <item
+            android:id="@+id/navigation_about"
+            android:icon="@drawable/ic_baseline_read_more_24"
+            android:title="@string/about" />
+
+    </group>
+        </menu>

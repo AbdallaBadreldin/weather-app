@@ -35,7 +35,7 @@ class DailyAdapter: RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        if (dailys==null)
+        if (dailys.isNullOrEmpty())            //watch out
             return 0
         return dailys.size
     }

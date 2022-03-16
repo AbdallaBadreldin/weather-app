@@ -1,36 +1,35 @@
 package eg.iti.weatherapp.main.ui.home
 
+
 import android.R
-import android.content.ClipDescription
-import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
-import android.widget.ImageView
-import android.widget.LinearLayout.HORIZONTAL
-import android.widget.LinearLayout.VERTICAL
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavGraph
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.navigation.NavigationView
 import eg.iti.weatherapp.databinding.HomeFragmentBinding
 import eg.iti.weatherapp.main.data.database.LocalSource
-import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
 import eg.iti.weatherapp.main.ui.location.toast
 import eg.iti.weatherapp.main.utils.DateUtils
 import java.util.*
-import kotlin.math.log
 
 
 class HomeFragmemnt : Fragment() {
@@ -60,8 +59,6 @@ class HomeFragmemnt : Fragment() {
     lateinit var txtTemp :TextView
     lateinit var imgWeatherIcon :ImageView
 
-
-
     val dailyAdapter = DailyAdapter()
     val hourlyAdapter = HourlyAdapter()
     override fun onCreateView(
@@ -69,13 +66,37 @@ class HomeFragmemnt : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-    viewModel = ViewModelProvider(this,MyViewModelFactory(
+        viewModel = ViewModelProvider(this,MyViewModelFactory(
             MainRepository(LocalSource(),
-            RemoteSource()
-        ))).get(HomeFragmemntViewModel::class.java)
+                RemoteSource()
+            ))).get(HomeFragmemntViewModel::class.java)
 
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+        //navigation drawer-----------------------------------------------------------------
+
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.homeAppBarMain.homeToolbar)
+//        binding.appBarMain.fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
+        val drawerLayout: DrawerLayout = binding.homeDrawerLayout
+        val navView: NavigationView = binding.homeNavView
+
+        val navController = this.findNavController()
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+//        var menu :Menu = binding.
+
+        var appBarConfiguration = AppBarConfiguration(
+            setOf(
+             // , R.id.nav_gallery, R.id.nav_slideshow
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(activity  as AppCompatActivity,navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
 
 
@@ -123,7 +144,7 @@ class HomeFragmemnt : Fragment() {
         txtTimezone = binding.timezone
         txtDt = binding.dt
         txtTemp=binding.temp
-        imgWeatherIcon=binding.weatherIcon
+        imgWeatherIcon=binding.homeCurrentWeatherIcon
     }
 
     override fun onDestroyView() {
@@ -167,5 +188,8 @@ class HomeFragmemnt : Fragment() {
                 swipeContainer.setRefreshing(false)
             }
 
+
+    fun setupSideDrawer(){
+    }
 
 }
