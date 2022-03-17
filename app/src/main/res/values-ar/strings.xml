@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">برنامج الاحوال الجوية</string>
+    <string name="english">انجليزى</string>
+    <string name="arabic">عربى</string>
+    <string name="language">اللغة</string>
+    <string name="next">التالى</string>
+    <string name="notification">الاشعارات</string>
+    <string name="settings">الاعدادات</string>
+</resources>

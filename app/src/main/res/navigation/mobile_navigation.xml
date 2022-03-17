@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/navigation_setting"
         android:name="eg.iti.weatherapp.main.ui.settings.SettingsFragment"
-        android:label="@string/setting"
+        android:label="@string/settings"
         tools:layout="@layout/settings_fragment" />
 
     <fragment
@@ -53,17 +53,13 @@
     <fragment
         android:id="@+id/navigation_alert"
         android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
-        android:label="@string/alert"
+        android:label="@string/alerts"
         tools:layout="@layout/home_fragment" />
 
     <fragment
         android:id="@+id/navigation_favourite"
         android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
-        android:label="@string/favourite"
+        android:label="@string/favourites"
         tools:layout="@layout/home_fragment" />
-
-
-
-
 
 </navigation>

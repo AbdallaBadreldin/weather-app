@@ -4,7 +4,7 @@
     <string name="title_welcome">Welcome</string>
     <string name="first_time_welcome_phrase">welcome, this application helps you to know the weather minute by minute</string>
     <string name="next">Next</string>
-    <string name="location_pick_instruction">you will need to specifiy your location so as show the weather of your location</string>
+    <string name="location_pick_instruction">you will need to specify your location so as show the weather of your location</string>
     <string name="get_weather_by_location">get weather by location</string>
     <string name="get_weather_by_map">get weather by map</string>
     <string name="get_weather_by_city">get weather by map</string>
@@ -15,17 +15,22 @@
     <string name="humidity">humidity</string>
     <string name="pressure">pressure</string>
     <string name="home">Home</string>
-    <string name="favourite">Favourite</string>
-    <string name="alert">Alert</string>
-    <string name="setting">Setting</string>
-    <string name="about">About</string>
+    <string name="favourites">Favourites</string>
+    <string name="alerts">Alerts</string>
+    <string name="settings">Settings</string>
+    <string name="about">About Us</string>
+
+
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="choose_application_language">Choose application Language</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
@@ -33,7 +38,15 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_setting">Settings</string>
+    <string name="language">language</string>
+    <string name="format">format</string>
+    <string name="choose_temperature">Choose temperature</string>
 
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="choose_wind_speed">choose wind speed</string>
+    <string name="notification">notification</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package eg.iti.weatherapp.main.data.repository.database.WeatherResponseDao
+package eg.iti.weatherapp.main.data.room.WeatherResponseDao
 
 import android.content.Context
 import androidx.room.Database
@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import eg.iti.weatherapp.main.data.model.WeatherResponse
-import eg.iti.weatherapp.main.data.repository.database.Converters
+import eg.iti.weatherapp.main.data.room.Converters
 
 
 @Database(entities = [WeatherResponse::class], version = 1 , exportSchema = false)

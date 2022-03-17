@@ -1,12 +1,42 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <!-- language Preference -->
+    <string-array name="language_entries">
+        <item>@string/english</item>
+        <item>@string/arabic</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="language_values">
+        <item>@string/pref_en</item>
+        <item>@string/pref_ar</item>
     </string-array>
+
+    <!-- temperature Preference -->
+    <string-array name="temperature_entries">
+        <item>@string/celsius</item>
+        <item>@string/kelvin</item>
+        <item>@string/fahrenheit</item>
+    </string-array>
+
+    <string-array name="temperature_values">
+        <item>@string/pref_celsius</item>
+        <item>@string/pref_kelvin</item>
+        <item>@string/pref_fahrenheit</item>
+    </string-array>
+
+
+    <!-- wind Preference -->
+    <string-array name="wind_entries">
+        <item>@string/meter_per_sec</item>
+        <item>@string/mile_per_hour</item>
+    </string-array>
+
+    <string-array name="wind_values">
+        <item>@string/pref_meterPerSecond</item>
+        <item>@string/pref_milePerHour</item>
+
+    </string-array>
+
+
+    <string name="meter_per_sec">Meter/Sec</string>
+    <string name="mile_per_hour">Mile/Hour</string>
 </resources>

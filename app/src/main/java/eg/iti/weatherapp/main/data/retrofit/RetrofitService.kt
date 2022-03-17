@@ -3,7 +3,6 @@ package eg.iti.weatherapp.main.data.retrofit
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitService {

@@ -1,17 +1,7 @@
 package eg.iti.weatherapp.main.data.repository
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import eg.iti.weatherapp.R
-import eg.iti.weatherapp.main.data.database.LocalSource
-import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
-import eg.iti.weatherapp.main.data.retrofit.RetrofitClient
-import eg.iti.weatherapp.main.data.retrofit.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import eg.iti.weatherapp.main.data.room.LocalSource
 
 class MainRepository (private val localSource : LocalSource, private val remoteSource : RemoteSource){
 

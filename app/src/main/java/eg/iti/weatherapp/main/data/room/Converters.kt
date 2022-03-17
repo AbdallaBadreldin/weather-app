@@ -1,4 +1,4 @@
-package eg.iti.weatherapp.main.data.repository.database
+package eg.iti.weatherapp.main.data.room
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

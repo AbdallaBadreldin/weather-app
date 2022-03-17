@@ -1,15 +1,8 @@
 package eg.iti.weatherapp
 
-import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import eg.iti.weatherapp.main.data.model.Current
-import eg.iti.weatherapp.main.data.model.Weather
-import eg.iti.weatherapp.main.data.model.WeatherResponse
-import eg.iti.weatherapp.main.data.repository.database.WeatherResponseDao.WeatherDao
-import eg.iti.weatherapp.main.data.repository.database.WeatherResponseDao.WeatherDataBase
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
+import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDao
+import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDataBase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

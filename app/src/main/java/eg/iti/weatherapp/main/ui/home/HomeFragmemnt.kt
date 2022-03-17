@@ -4,16 +4,15 @@ package eg.iti.weatherapp.main.ui.home
 import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.layoutDirection
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
@@ -23,9 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.navigation.NavigationView
 import eg.iti.weatherapp.databinding.HomeFragmentBinding
-import eg.iti.weatherapp.main.data.database.LocalSource
+import eg.iti.weatherapp.main.MainActivity
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
+import eg.iti.weatherapp.main.data.room.LocalSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
 import eg.iti.weatherapp.main.ui.location.toast
 import eg.iti.weatherapp.main.utils.DateUtils
@@ -64,10 +64,11 @@ class HomeFragmemnt : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModel = ViewModelProvider(this,MyViewModelFactory(
-            MainRepository(LocalSource(),
+            MainRepository(
+                LocalSource(),
                 RemoteSource()
             ))).get(HomeFragmemntViewModel::class.java)
 
@@ -90,7 +91,7 @@ class HomeFragmemnt : Fragment() {
         // menu should be considered as top level destinations.
 //        var menu :Menu = binding.
 
-        var appBarConfiguration = AppBarConfiguration(
+        val appBarConfiguration = AppBarConfiguration(
             setOf(
              // , R.id.nav_gallery, R.id.nav_slideshow
             ), drawerLayout
@@ -125,7 +126,7 @@ class HomeFragmemnt : Fragment() {
             R.color.holo_blue_bright,
             R.color.holo_green_light,
             R.color.holo_orange_light,
-            R.color.holo_red_light);
+            R.color.holo_red_light)
 
 
         return root
@@ -153,11 +154,12 @@ class HomeFragmemnt : Fragment() {
     }
 
     fun fetchTimelineAsync() {
-        viewModel.getCurrentWeather()
+        viewModel.getCurrentWeather(requireActivity())
 
         viewModel.currentWeather.observe(requireActivity()) {
+//            Toast.makeText(context,it.lon,Toast.LENGTH_LONG).show()
             txtTimezone.text = it.timeZone
-            txtDt.text = DateUtils(it.current.dayTime.toLong(), Locale.ENGLISH).convertDate()
+            txtDt.text = DateUtils(it.current.dayTime.toLong(), Locale.ENGLISH).convertDate()  //todo don't forget to change this
             txtWeather_discription.text=it.current.weather[0].description
             txtTemp.text = it.current.temp
             txtPressure.text = it.current.pressure
@@ -188,7 +190,13 @@ class HomeFragmemnt : Fragment() {
                 swipeContainer.setRefreshing(false)
             }
 
-
+    override fun onStart() {
+        super.onStart()
+    }
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.decorView?.layoutDirection = Locale.getDefault().layoutDirection
+    }
     fun setupSideDrawer(){
     }
 

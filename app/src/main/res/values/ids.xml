@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="shared_pref_file">kotlinsharedpreference</string>
-    <string name="longitude">longitude_preference</string>
-    <string name="alatitude">alatitude_preference</string>
-    <string name="weather_api">6bfac4a32ea2220f97cade47d4ac244b</string>
+    <string name="shared_pref_file" translatable="false">kotlinsharedpreference</string>
 
+    <string name="preference_longitude" translatable="false" >pref_longitude</string>
+    <string name="preference_alatitude" translatable="false">pref_alatitude</string>
+
+    <string name="weather_api" translatable="false">6bfac4a32ea2220f97cade47d4ac244b</string>
+
+<!--    share pereferences keys all over the app-->
+    <string name="preference_language" translatable="false">pref_lang</string>
+    <string name="preference_temperature" translatable="false">pref_temp</string>
+    <string name="preference_windSpeed" translatable="false">pref_wind</string>
+    <string name="preference_notification" translatable="false">pref_noti</string>
+
+<!--    shared pereferences values all over the app-->
+    <string name="pref_celsius" translatable="false">celsius</string>
+    <string name="pref_kelvin" translatable="false">kelvin</string>
+    <string name="pref_fahrenheit" translatable="false">fahrenheit</string>
+    <string name="pref_en" translatable="false">en</string>
+    <string name="pref_ar" translatable="false">ar</string>
+    <string name="pref_meterPerSecond" translatable="false">Meter/hour</string>
+    <string name="pref_milePerHour" translatable="false">Mile/hour</string>
+    <string name="pref_notification_enabled" translatable="false">true</string>
+    <string name="pref_notification_disabled" translatable="false">false</string>
 </resources>

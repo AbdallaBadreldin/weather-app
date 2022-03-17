@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import eg.iti.weatherapp.R
@@ -47,8 +48,8 @@ class PickLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //shared preferences
-         sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.shared_pref_file),Context.MODE_PRIVATE)
-
+//         sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.shared_pref_file),Context.MODE_PRIVATE)
+       sharedPreferences= PreferenceManager.getDefaultSharedPreferences(requireContext())
         viewModel = ViewModelProvider(this).get(PickLocationViewModel::class.java)
         // TODO: Use the ViewModel
 
@@ -121,8 +122,9 @@ class PickLocationFragment : Fragment() {
             //here I am going to save shared pereferences and navigate to next screen where api retrofit :)
             val editor:SharedPreferences.Editor =  sharedPreferences.edit()
 
-            editor.putString(getString(R.string.longitude), location?.longitude.toString())
-            editor.putString(getString(R.string.alatitude), location?.altitude.toString())
+            editor.putString(getString(R.string.preference_longitude), location?.longitude.toString())
+            Toast.makeText(context,location?.longitude.toString(),Toast.LENGTH_LONG).show()
+            editor.putString(getString(R.string.preference_alatitude), location?.altitude.toString())
             editor.apply()
             editor.commit()
             findNavController().navigate(ActionOnlyNavDirections(R.id.action_pick_to_home) ) //for test purposal only
