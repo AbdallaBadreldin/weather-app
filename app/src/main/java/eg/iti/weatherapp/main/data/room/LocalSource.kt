@@ -5,6 +5,11 @@ import androidx.lifecycle.LiveData
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDao
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDataBase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+
 
 
 // here we add our interface for all local data
@@ -15,22 +20,81 @@ we will modify localSource
 class LocalSource : LocalSourceInterface{
 
         companion object{
-                private lateinit var weatherDao: WeatherDao
-                private lateinit var storedWeather : LiveData<List<WeatherResponse>>
-                private lateinit var storedFavouriteWeather : LiveData<List<WeatherResponse>>
-                private lateinit var storedCurretWeather : LiveData<List<WeatherResponse>>
+                private var weatherDataBase: WeatherDataBase? =null
+                private var storedWeather : LiveData<List<WeatherResponse>>? =null
+                private var storedFavouriteWeather : LiveData<List<WeatherResponse>>? = null
+                private var storedCurretWeather : LiveData<List<WeatherResponse>>? = null
 
-                fun initializeDB(context: Context) : WeatherDataBase {
-                        val weatherDataBase : WeatherDataBase = WeatherDataBase.getInstance(context)
-                        weatherDao = weatherDataBase.weatehrDao()
-                        storedWeather = weatherDao.getAllOfflineData()
-                        storedFavouriteWeather = weatherDao.getFavouriteWeather()
-                        storedCurretWeather = weatherDao.getCurrentWeather()
+                fun initializeDB(context: Context) : WeatherDataBase =  WeatherDataBase.Companion(context)
 
-                        return weatherDao as WeatherDataBase
+                fun insertData(context: Context,weatherResponse: WeatherResponse){
+                        weatherDataBase = initializeDB(context = context)
+              CoroutineScope(IO).launch {
+                      val weatherDetails = weatherResponse
+                      weatherDataBase!!.weatherDao().insertWeatherResponse(weatherDetails)
+              }
                 }
         }
 
+        override fun getAllWeather(context: Context): Flow<List<WeatherResponse>> {
+              weatherDataBase= initializeDB(context = context)
+                return weatherDataBase!!.weatherDao().getAllOfflineData()
+        }
+
+        override fun getFavourtieWeather(context: Context): Flow<List<WeatherResponse>> {
+                weatherDataBase= initializeDB(context = context)
+                return weatherDataBase!!.weatherDao().getFavouriteWeather()
+        }
+//
+        override fun getCurrentWeather(context: Context): Flow<List<WeatherResponse>> {
+                weatherDataBase= initializeDB(context = context)
+                return weatherDataBase!!.weatherDao().getCurrentWeather()
+        }
+
+        override fun insertWeatherResponse(weatherResponse: WeatherResponse,context: Context) {
+                weatherDataBase = initializeDB(context = context)
+                CoroutineScope(IO).launch {
+                        val weatherDetails = weatherResponse
+                        weatherDataBase!!.weatherDao().insertWeatherResponse(weatherDetails)
+        }}
+
+     override   fun deleteWeatherResponse(weatherResponse: WeatherResponse,context: Context) {
+                weatherDataBase = initializeDB(context = context)
+                CoroutineScope(IO).launch {
+                        val weatherDetails = weatherResponse
+                        weatherDataBase!!.weatherDao().delete(weatherDetails)
+        }
+        }
+
+        override fun deleteAllData(context: Context) {
+//                TODO("Not yet implemented")
+        }
+
+
+        override  fun deleteAllCurrentWeatherResponse(context: Context) {
+//                 weatherDataBase = initializeDB(context = context)
+//                 CoroutineScope(IO).launch {
+//
+//                         weatherDataBase!!.weatherDao().deleteAllCurrent()
+//                 }
+        }
+
+             override    fun deleteAllFavouriteWeatherResponse(context: Context) {
+//                     weatherDataBase = initializeDB(context = context)
+//                     CoroutineScope(IO).launch {
+//
+//                             weatherDataBase!!.weatherDao().deleteAllFavourite()
+//                     }
+             }
+        override   fun updateWeatherResponse(weatherResponse: WeatherResponse,context: Context) {
+                         TODO("Not yet implemented")
+                 }
+
+
+
+         }
+
+/*
         override fun getAllWeather():  LiveData<List<WeatherResponse>> {
                 return storedWeather
         }
@@ -44,7 +108,7 @@ class LocalSource : LocalSourceInterface{
         }
 
         override fun insertWeatherResponse(weatherResponse: WeatherResponse) {
-                weatherDao.insertAll(weatherResponse)
+                weatherDao.insertWeatherResponse(weatherResponse)
         }
 
         override fun deleteWeatherResponse(weatherResponse: WeatherResponse) {
@@ -65,6 +129,16 @@ class LocalSource : LocalSourceInterface{
 
         override fun updateWeatherResponse(weatherResponse: WeatherResponse) {
                 weatherDao.updateWeather()
-        }
-}
+        }*/
+
+
+
+/*val weatherDataBase : WeatherDataBase = WeatherDataBase.getInstance(context)
+weatherDao = weatherDataBase.weatehrDao()
+storedWeather = weatherDao.getAllOfflineData()
+storedFavouriteWeather = weatherDao.getFavouriteWeather()
+storedCurretWeather = weatherDao.getCurrentWeather()
+
+return this
+}*/
 

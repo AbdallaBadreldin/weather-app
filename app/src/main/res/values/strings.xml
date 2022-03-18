@@ -49,4 +49,7 @@
     <string name="choose_wind_speed">choose wind speed</string>
     <string name="notification">notification</string>
 
+    <string name="no_stored_data">no stored data</string>
+
+
 </resources>

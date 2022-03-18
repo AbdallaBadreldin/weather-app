@@ -1,10 +1,12 @@
 package eg.iti.weatherapp.main.data.model
 
+import androidx.room.Entity
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import eg.iti.weatherapp.main.data.room.Converters
+import eg.iti.weatherapp.main.data.room.WeatherResponseDao.Converters
 import java.io.Serializable
 
+//@Entity(tableName = "WeatherResponse" )
 data class Current constructor(
     @SerializedName("dt")
     val dayTime :String,

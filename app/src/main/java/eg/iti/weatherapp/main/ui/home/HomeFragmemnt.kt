@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.layoutDirection
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
@@ -22,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.navigation.NavigationView
 import eg.iti.weatherapp.databinding.HomeFragmentBinding
-import eg.iti.weatherapp.main.MainActivity
+import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
@@ -43,9 +45,9 @@ class HomeFragmemnt : Fragment() {
 
     companion object {
         fun newInstance() = HomeFragmemnt()
+        fun oldInstance() = this
     }
     lateinit var swipeContainer: SwipeRefreshLayout
-
 
     lateinit var txtWeather_discription :TextView
     lateinit var txtPressure :TextView
@@ -61,11 +63,11 @@ class HomeFragmemnt : Fragment() {
 
     val dailyAdapter = DailyAdapter()
     val hourlyAdapter = HourlyAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         viewModel = ViewModelProvider(this,MyViewModelFactory(
             MainRepository(
                 LocalSource(),
@@ -75,31 +77,9 @@ class HomeFragmemnt : Fragment() {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         //navigation drawer-----------------------------------------------------------------
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.homeAppBarMain.homeToolbar)
-//        binding.appBarMain.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-        val drawerLayout: DrawerLayout = binding.homeDrawerLayout
-        val navView: NavigationView = binding.homeNavView
-
-        val navController = this.findNavController()
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        var menu :Menu = binding.
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-             // , R.id.nav_gallery, R.id.nav_slideshow
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(activity  as AppCompatActivity,navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
-
+        setupSideDrawer()
 
     binding.dailyRecyclerView.apply {
         layoutManager = LinearLayoutManager(activity)
@@ -127,7 +107,6 @@ class HomeFragmemnt : Fragment() {
             R.color.holo_green_light,
             R.color.holo_orange_light,
             R.color.holo_red_light)
-
 
         return root
 //        inflater.inflate(R.layout.home_fragmemnt_fragment, container, false)
@@ -157,29 +136,22 @@ class HomeFragmemnt : Fragment() {
         viewModel.getCurrentWeather(requireActivity())
 
         viewModel.currentWeather.observe(requireActivity()) {
-//            Toast.makeText(context,it.lon,Toast.LENGTH_LONG).show()
-            txtTimezone.text = it.timeZone
-            txtDt.text = DateUtils(it.current.dayTime.toLong(), Locale.ENGLISH).convertDate()  //todo don't forget to change this
-            txtWeather_discription.text=it.current.weather[0].description
-            txtTemp.text = it.current.temp
-            txtPressure.text = it.current.pressure
-            txtHumidity.text = it.current.humidity
-            txtWind.text = it.current.windSpeed
-            txtCloud.text = it.current.cloud
-            txtUltraViolet.text = it.current.ultraViolet
-            txtVisibility.text = it.current.visibility
-
-            //update adapters adapter
-            dailyAdapter.setDailyList(it.daily)
-            dailyAdapter.notifyDataSetChanged()
-
-            hourlyAdapter.setHourlyListItems(it.hourly)
-            hourlyAdapter.notifyDataSetChanged()
-
+         setDataIntoLayout(it)
             swipeContainer.setRefreshing(false)
         }
         viewModel.errorMessage.observe(requireActivity(), Observer {
             context?.toast(it)
+
+
+            viewModel.getOfflineStoredData(requireParentFragment(),viewLifecycleOwner).observe( viewLifecycleOwner)
+            {
+                setDataIntoLayout(it[0])
+            }
+
+
+//            if(temp?.lat.isNullOrEmpty())//error
+//            else
+//                currentWeather.postValue(  temp!! )
             swipeContainer.setRefreshing(false)
         })
                 // Remember to CLEAR OUT old items before appending in the new ones
@@ -190,6 +162,28 @@ class HomeFragmemnt : Fragment() {
                 swipeContainer.setRefreshing(false)
             }
 
+     fun setDataIntoLayout(it: WeatherResponse?) {
+        txtTimezone.text = it?.timeZone
+        txtDt.text =
+            it?.current?.dayTime?.let { it1 -> DateUtils(it1.toLong(), Locale.ENGLISH).convertDate() }  //todo don't forget to change this
+        txtWeather_discription.text= it?.current!!.weather[0].description
+        txtTemp.text = it?.current?.temp
+        txtPressure.text = it?.current?.pressure
+        txtHumidity.text = it?.current.humidity
+        txtWind.text = it?.current.windSpeed
+        txtCloud.text = it?.current.cloud
+        txtUltraViolet.text = it?.current.ultraViolet
+        txtVisibility.text = it?.current.visibility
+
+        //update adapters adapter
+        dailyAdapter.setDailyList(it.daily)
+        dailyAdapter.notifyDataSetChanged()
+//
+        hourlyAdapter.setHourlyListItems(it.hourly)
+        hourlyAdapter.notifyDataSetChanged()
+
+    }
+
     override fun onStart() {
         super.onStart()
     }
@@ -198,6 +192,27 @@ class HomeFragmemnt : Fragment() {
         activity?.window?.decorView?.layoutDirection = Locale.getDefault().layoutDirection
     }
     fun setupSideDrawer(){
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.homeAppBarMain.homeToolbar)
+//        binding.appBarMain.fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
+
+        val drawerLayout: DrawerLayout = binding.homeDrawerLayout
+        val navView: NavigationView = binding.homeNavView
+
+        val navController = this.findNavController()
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+//        var menu :Menu = binding.
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                // , R.id.nav_gallery, R.id.nav_slideshow
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(activity  as AppCompatActivity,navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
 }

@@ -1,28 +1,33 @@
 package eg.iti.weatherapp.main.data.room.WeatherResponseDao
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import eg.iti.weatherapp.main.data.model.WeatherResponse
-import eg.iti.weatherapp.main.data.room.Converters
+import androidx.room.*
+import eg.iti.weatherapp.main.data.model.*
 
+//@ProvidedTypeConverter
 
 @Database(entities = [WeatherResponse::class], version = 1 , exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class WeatherDataBase : RoomDatabase(), WeatherDao {
-    abstract fun weatehrDao(): WeatherDao
-
+abstract class WeatherDataBase : RoomDatabase() {
+        abstract fun weatherDao() : WeatherDao
     companion object {
-        @Volatile private var INSTANCE: WeatherDataBase? = null
+        @Volatile
+        private var instance: WeatherDataBase? = null
+        private val LOCK = Any()
 
-        fun getInstance(context: Context): WeatherDataBase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
+            instance ?: createDatabase(context).also {
+                instance = it
             }
+        }
 
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, WeatherDataBase::class.java, "Weather_Response.db").build()
+        private fun createDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                WeatherDataBase::class.java,
+                "WeatherResponse",
+            ).addTypeConverter(Converters())
+                .fallbackToDestructiveMigration()
+                .build()
     }
 }

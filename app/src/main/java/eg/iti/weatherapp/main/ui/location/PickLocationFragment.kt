@@ -123,7 +123,6 @@ class PickLocationFragment : Fragment() {
             val editor:SharedPreferences.Editor =  sharedPreferences.edit()
 
             editor.putString(getString(R.string.preference_longitude), location?.longitude.toString())
-            Toast.makeText(context,location?.longitude.toString(),Toast.LENGTH_LONG).show()
             editor.putString(getString(R.string.preference_alatitude), location?.altitude.toString())
             editor.apply()
             editor.commit()

@@ -1,38 +1,44 @@
 package eg.iti.weatherapp.main.data.repository
 
+import android.content.Context
+import androidx.annotation.WorkerThread
+import eg.iti.weatherapp.main.data.model.Weather
+import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
+import eg.iti.weatherapp.main.data.room.LocalSource.Companion.initializeDB
+import eg.iti.weatherapp.main.data.room.LocalSourceInterface
+import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDao
+import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDataBase
+import kotlinx.coroutines.flow.Flow
 
-class MainRepository (private val localSource : LocalSource, private val remoteSource : RemoteSource){
 
-fun getCurrentWeatherByLocation(lat:String,lon:String,unit:String,lang:String,API:String)
+class MainRepository ( private val localSource: LocalSource,private val remoteSource : RemoteSource){
+//private val localSource = initializeDB(context = context) as LocalSourceInterface
+
+  //online
+    fun getCurrentWeatherByLocation(lat:String,lon:String,unit:String,lang:String,API:String)
 = remoteSource.getCurrent(lat,lon,unit,lang,API)
 
 
+    //offline
+    fun insertWeatherResponseToDatabase(weather: WeatherResponse ,context: Context) {
+        localSource.insertWeatherResponse(weather,context)
+    }
 
-    /*fun getCurrentWeatherLiveDataByLocation(context: Context) : MutableLiveData<WeatherResponse> {
+    fun deleteWeatherResponseFromDatabase(weather :WeatherResponse,context:Context) {
+        localSource.deleteWeatherResponse(weather,  context)
+    }
+    fun deleteCurrentWeather(context: Context){
+        localSource.deleteAllCurrentWeatherResponse(context)
+    }
 
-        val mutableLiveData = MutableLiveData<WeatherResponse>()
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+   fun getCurrentWeatherFromDataBase (context: Context) : Flow<List<WeatherResponse>> =
+       localSource.getCurrentWeather(context = context)
 
-//        context.showProgressBar()
 
-        remoteSource.getCurrent("33.44","33.44","standard","en",context.getString(R.string.weather_api)).enqueue(object : Callback<WeatherResponse> {
-            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-//                hideProgressBar()
-                Log.e("error", t.localizedMessage as String)
-            }
 
-            override fun onResponse(
-                call: Call<WeatherResponse>,
-                response: Response<WeatherResponse>
-            ) {
-//                hideProgressBar()
-                val usersResponse = response.body()
-                usersResponse?.let { mutableLiveData.value = it as WeatherResponse }
-            }
-
-        })
-
-        return mutableLiveData
-    }*/
+//   }=localSource.getCurrentWeather(context )
 }
