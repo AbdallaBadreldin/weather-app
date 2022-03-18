@@ -6,8 +6,11 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.ConfigurationCompat
 import androidx.core.text.layoutDirection
+import androidx.preference.PreferenceManager
+import eg.iti.weatherapp.R
 import java.util.*
 
 class LocaleUtil  {
@@ -98,6 +101,37 @@ class LocaleUtil  {
             @Suppress("DEPRECATION")
             resources.updateConfiguration(config, resources.displayMetrics)
             return resources
+        }
+
+        fun translateEnglishToArabic( str :String,context: Context) :String{
+            var result = ""
+            var en = '0'
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+              if(context.getResources().getConfiguration().getLocales().get(0)!=Locale(context.getString(R.string.pref_ar)))
+                  return str
+            } else{
+//                noinspection deprecation
+                if(context.getResources().getConfiguration().locale!=Locale(context.getString(R.string.pref_ar)))
+                    return str
+            }
+                for (ch in str) {
+                    en = ch
+                    when (ch) {
+                        '0' -> en = '۰'
+                        '1' -> en = '۱'
+                        '2' -> en = '۲'
+                        '3' -> en = '۳'
+                        '4' -> en = '٤'
+                        '5' -> en = '٥'
+                        '6' -> en = '٦'
+                        '7' -> en = '٧'
+                        '8' -> en = '۸'
+                        '9' -> en = '۹'
+                        else ->en = ','
+                    }
+                    result = "${result}$en"
+                }
+            return result
         }
     }
 }

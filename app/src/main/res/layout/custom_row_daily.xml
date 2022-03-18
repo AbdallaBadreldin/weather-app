@@ -7,29 +7,37 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    android:padding="8dp"
+    android:foregroundGravity="center"
     app:cardCornerRadius="90dp"
     app:layout_anchorGravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="clip_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
 
         <TextView
+
             android:id="@+id/daily_day"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_gravity="clip_horizontal"
             android:layout_weight="1"
-            android:gravity="center"
+
+            android:gravity="clip_horizontal"
             tools:text="sat or tommorow" />
 
         <ImageView
             android:id="@+id/daily_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
+            android:layout_gravity="fill_vertical"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -37,16 +45,20 @@
             android:id="@+id/daily_dec"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="end"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="end"
+
             tools:text="clear sky" />
 
         <TextView
             android:id="@+id/daily_deg_feel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="end"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="end"
+
             tools:text="23/13c" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

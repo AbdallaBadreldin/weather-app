@@ -15,7 +15,7 @@ interface WeatherDao {
     @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 1")
     fun getFavouriteWeather():  Flow<List<WeatherResponse>>
 
-    @Query("SELECT * FROM WeatherResponse ")
+    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 0")
     fun getCurrentWeather(): Flow<List<WeatherResponse>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

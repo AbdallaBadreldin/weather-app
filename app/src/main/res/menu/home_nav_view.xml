@@ -38,7 +38,7 @@ android:id="@+id/home_drawer_menu"
 
 
         <item
-            android:id="@+id/navigation_notification"
+            android:id="@+id/navigation_alert"
             android:icon="@drawable/ic_baseline_notifications_24"
             android:title="@string/alerts" />
 

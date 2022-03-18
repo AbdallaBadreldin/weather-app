@@ -5,9 +5,9 @@
     <string name="first_time_welcome_phrase">welcome, this application helps you to know the weather minute by minute</string>
     <string name="next">Next</string>
     <string name="location_pick_instruction">you will need to specify your location so as show the weather of your location</string>
-    <string name="get_weather_by_location">get weather by location</string>
+    <string name="get_weather_by_location">get weather by GPS</string>
     <string name="get_weather_by_map">get weather by map</string>
-    <string name="get_weather_by_city">get weather by map</string>
+    <string name="get_weather_by_city">get weather by city</string>
     <string name="visibility">Visibility</string>
     <string name="ultra_violet">Ultra Violet</string>
     <string name="cloud">cloud</string>
@@ -26,18 +26,11 @@
 
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
     <string name="choose_application_language">Choose application Language</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="language">language</string>
     <string name="format">format</string>
     <string name="choose_temperature">Choose temperature</string>
@@ -50,6 +43,15 @@
     <string name="notification">notification</string>
 
     <string name="no_stored_data">no stored data</string>
+    <string name="need_internet">error need internet connection</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuseday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">thursday</string>
+    <string name="friday">Friday</string>
+    <string name="about_phrase">this app made under the copy right of ITI @ EG \n under supervision of Eng/Ahmed Mazen and Eng/Heba \n I wish you taset new experience and be happy :)</string>
 
 
 </resources>

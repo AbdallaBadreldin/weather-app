@@ -16,11 +16,14 @@ import eg.iti.weatherapp.R
 import eg.iti.weatherapp.databinding.CustomRowDailyBinding
 import eg.iti.weatherapp.databinding.CustomRowHourlyBinding
 import eg.iti.weatherapp.main.data.model.Hourly
+import eg.iti.weatherapp.main.utils.DateUtils
+import eg.iti.weatherapp.main.utils.LocaleUtil
+import java.util.*
 
 //  list: List<Hourly>,
 class HourlyAdapter( ): RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
     var hourlys = mutableListOf<Hourly>()
-
+lateinit var context:Context
 
 //    init {
 //      this.hourlys = list.toTypedArray().toMutableList()
@@ -49,6 +52,7 @@ hourlys = body as MutableList<Hourly>
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context=parent.context
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.custom_row_hourly, parent, false)
         return ViewHolder(view)
@@ -56,12 +60,34 @@ hourlys = body as MutableList<Hourly>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var hourlyDetails = hourlys[position]
-holder.time.text =  hourlyDetails.dt    //convert it please
-        holder.temp.text = hourlyDetails.temp
-//        holder.image.setImageResource() // no photos yet
+        holder.time.text =  DateUtils.convertHour(hourlyDetails.dt.toLong(), Locale.getDefault()).toString()
+        holder.temp.text = LocaleUtil.translateEnglishToArabic(hourlyDetails.temp,context)
+        holder.image.setImageResource(pickPhoto(hourlyDetails.weather[0].icon)) // no photos yet
     }
 
-
+    fun pickPhoto(image :String): Int {
+        when (image) {
+            "01d" -> return R.drawable.oned
+            "01n" -> return R.drawable.onen
+            "02d" -> return R.drawable.twod
+            "02n" -> return R.drawable.twon
+            "03d" -> return R.drawable.threed
+            "03n" -> return R.drawable.threen
+            "04d" -> return R.drawable.fourd
+            "04n" -> return R.drawable.fourn
+            "09d" -> return R.drawable.nined
+            "09n" -> return R.drawable.ninen
+            "10d" -> return R.drawable.tend
+            "10n" -> return R.drawable.tenn
+            "11d" -> return R.drawable.eleven_d
+            "11n" -> return R.drawable.eleven_n
+            "13d" -> return R.drawable.thirteen_d
+            "13n" -> return R.drawable.thirteen_n
+            "50d" -> return R.drawable.fifty_d
+            "50n" -> return R.drawable.fifty_n
+            else ->  return R.drawable.twon
+        }
+    }
     override fun getItemCount(): Int= hourlys.size
 
 }

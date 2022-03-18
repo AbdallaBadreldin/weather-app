@@ -74,10 +74,8 @@ class HomeFragmemntViewModel(private val mainRepository: MainRepository) : ViewM
         })
     }
 
-    fun getOfflineStoredData(context : Fragment,owner: LifecycleOwner) : LiveData<List<WeatherResponse>>{
-
-
-       return  mainRepository.getCurrentWeatherFromDataBase(context = context.requireContext()).asLiveData()
+    fun getOfflineStoredData(context : Context) : LiveData<List<WeatherResponse>>
+    =mainRepository.getCurrentWeatherFromDataBase(context = context).asLiveData()
 //        var temp:List<WeatherResponse>
 
 //             mainRepository.getCurrentWeatherFromDataBase(context.requireContext()).
@@ -89,9 +87,10 @@ class HomeFragmemntViewModel(private val mainRepository: MainRepository) : ViewM
 //        mainRepository.getCurrentWeatherFromDataBase(context.requireContext() ).observe(owner, Observer<List<WeatherResponse?>?> {
 //            var tempo =context.childFragmentManager.fragments[0] as HomeFragmemnt
 //            tempo.setDataIntoLayout( it[0] )
-        }
+
 //    ) //get all data
 
 
-    }
 
+
+}

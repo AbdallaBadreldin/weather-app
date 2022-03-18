@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:layout_margin="16dp"
+    android:foregroundGravity="center"
     app:cardCornerRadius="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -18,15 +23,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:foregroundGravity="center"
             android:gravity="center"
             tools:text="3 am" />
 
         <ImageView
-            android:layout_margin="8dp"
             android:id="@+id/hourly_image"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:foregroundGravity="center"
             tools:srcCompat="@tools:sample/avatars">
 
         </ImageView>
@@ -37,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:foregroundGravity="center"
             android:gravity="center"
             tools:text="13 C">
 

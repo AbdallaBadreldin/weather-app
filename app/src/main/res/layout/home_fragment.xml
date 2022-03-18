@@ -12,7 +12,7 @@
         android:id="@+id/home_app_bar_main"
         layout="@layout/home_app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="74dp"
+            android:paddingTop="56dp"
             tools:context=".main.ui.home.HomeFragmemnt">
 
             <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingTop="512dp">
+                android:paddingTop="750dp">
 
                 <TextView
                     android:id="@+id/timezone"
@@ -60,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="48dp"
-
                     app:cardCornerRadius="90dp"
                     tools:layout_editor_absoluteX="1dp"
                     tools:layout_editor_absoluteY="156dp">

@@ -3,19 +3,26 @@ package eg.iti.weatherapp.main.utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateUtils constructor(var time : Long , locale: Locale)  {
-     var simpleDateFormat:SimpleDateFormat
+class DateUtils constructor( ) {
 
-init {
-      simpleDateFormat=SimpleDateFormat("dd MMMM yyyy, HH:mm:ss", locale)
-}
-   companion object fun convertDate(): String {
 
-        return getDateString(time)
+    companion object {
+
+
+        fun convertDate(time: Long, locale: Locale): String {
+            var simpleDateFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss", locale)
+            return getDateString(time,simpleDateFormat)
+        }
+        fun convertHour(time: Long , locale: Locale):String{
+            var simpleDateFormatForDay = SimpleDateFormat("hh aa", locale)
+            return  getHourString(time,simpleDateFormatForDay)
+        }
+
+        private fun getDateString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time * 1000L)
+
+        private fun getHourString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time * 1000L)
+
     }
 
-    private fun getDateString(time: Long) : String = simpleDateFormat.format(time * 1000L)
-
-//    private fun getDateString(time: Int) : String = simpleDateFormat.format(time * 1000L) //just for test
 
 }
