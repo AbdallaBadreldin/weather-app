@@ -33,6 +33,7 @@ class PickLocationFragment : Fragment() {
     private lateinit var viewModel: PickLocationViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var sharedPreferences: SharedPreferences
+
     companion object {
         fun newInstance() = PickLocationFragment()
     }
@@ -47,11 +48,12 @@ class PickLocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         //shared preferences
-//         sharedPreferences = requireActivity().getSharedPreferences(getString(R.string.shared_pref_file),Context.MODE_PRIVATE)
        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(requireContext())
+
         viewModel = ViewModelProvider(this).get(PickLocationViewModel::class.java)
-        // TODO: Use the ViewModel
+        // TODO: Use the ViewModel seems to use it for shared prefrences with location data getter and setter but this will be latter
 
         _binding = PickLocationFragmentBinding.inflate(inflater,container,false)
         val root = binding.root
@@ -61,7 +63,6 @@ class PickLocationFragment : Fragment() {
         btnGps = binding.gpsLocation
         btnMap = binding.mapLocation
         btnCity = binding.cityLocation
-
 
         // Initialize a list of required permissions to request runtime
         val list = listOf<String>(
@@ -78,6 +79,14 @@ class PickLocationFragment : Fragment() {
                 managePermissions.checkPermissions()
 
             getLastKnownLocation()
+        }
+
+        btnMap.setOnClickListener {
+            findNavController().navigate(ActionOnlyNavDirections(R.id.navigation_map) ) //for test purposal only
+        }
+
+        btnCity.setOnClickListener {
+            context?.toast(getText(R.string.feature_not_available) as String)
         }
 
         return root
@@ -119,7 +128,7 @@ class PickLocationFragment : Fragment() {
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
 //                 Got last known location. In some rare situations this can be null.
-            //here I am going to save shared pereferences and navigate to next screen where api retrofit :)
+            //here I am going to save shared Preference and navigate to next screen where api retrofit :)
             val editor:SharedPreferences.Editor =  sharedPreferences.edit()
 
             editor.putString(getString(R.string.preference_longitude), location?.longitude.toString())
@@ -148,11 +157,9 @@ class PickLocationFragment : Fragment() {
             }
         }
         }
-
         locationPermissionRequest.launch(arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION))
-
     }
 
     override fun onDestroyView() {

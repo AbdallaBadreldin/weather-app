@@ -61,5 +61,18 @@
         android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
         android:label="@string/favourites"
         tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="eg.iti.weatherapp.main.ui.map.MapsFragment"
+        android:label="@string/favourites"
+        tools:layout="@layout/home_fragment" >
+    <action
+        android:id="@+id/action_map_to_home"
+        app:destination="@id/navigation_home"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_welcome"
+        app:popUpToInclusive="true" />
+
+</fragment>
 
 </navigation>

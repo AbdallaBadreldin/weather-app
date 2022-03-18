@@ -52,6 +52,9 @@
     <string name="thursday">thursday</string>
     <string name="friday">Friday</string>
     <string name="about_phrase">this app made under the copy right of ITI @ EG \n under supervision of Eng/Ahmed Mazen and Eng/Heba \n I wish you taset new experience and be happy :)</string>
+    <string name="feature_not_available">this feature not available ;)</string>
+    <string name="picked_location">Picked_location</string>
+    <string name="confirm_location">Confirm Location</string>
 
 
 </resources>
