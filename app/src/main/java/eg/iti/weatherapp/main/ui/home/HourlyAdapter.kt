@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import eg.iti.weatherapp.R
 import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.utils.DateUtils
 import eg.iti.weatherapp.main.utils.LocaleUtil
+import java.math.MathContext
 import java.util.*
 
 //  list: List<Hourly>,
@@ -50,7 +52,7 @@ class HourlyAdapter : RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
         var hourlyDetails = hourlys[position]
         holder.time.text =
             DateUtils.convertHour(hourlyDetails.dt.toLong(), Locale.getDefault()).toString()
-        holder.temp.text = LocaleUtil.translateEnglishToArabic(hourlyDetails.temp, context)
+        holder.temp.text = LocaleUtil.translateEnglishToArabic(convertTempAsSharedPreferences(hourlyDetails.temp), context)
         holder.image.setImageResource(pickPhoto(hourlyDetails.weather[0].icon)) // no photos yet
     }
 
@@ -76,6 +78,18 @@ class HourlyAdapter : RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
             "50n" -> return R.drawable.fifty_n
             else -> return R.drawable.twon
         }
+    }
+    fun  convertTempAsSharedPreferences(temp :String ) :String{
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val tempo =sharedPreferences.getString(context.getString(eg.iti.weatherapp.R.string.preference_temperature),context.getString(eg.iti.weatherapp.R.string.pref_kelvin))
+        when(tempo){
+            context.getString(eg.iti.weatherapp.R.string.pref_kelvin) -> return temp + context.getString(eg.iti.weatherapp.R.string.unit_kelvin)
+            context.getString(eg.iti.weatherapp.R.string.pref_celsius) -> return (temp.toDouble() -273.15).toBigDecimal(
+                MathContext(2) ).toString() + context.getString(eg.iti.weatherapp.R.string.unit_celsuis) //°C
+            context.getString(eg.iti.weatherapp.R.string.pref_fahrenheit) -> return ((temp.toDouble() * 9/5 - 459.67).toBigDecimal(
+                MathContext(2) )).toString() + context.getString(eg.iti.weatherapp.R.string.unit_fahrenhiet)
+        }
+        return temp
     }
 
     override fun getItemCount(): Int = hourlys.size

@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:name="eg.iti.weatherapp.main.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/home_fragment" />
 
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navigation_alert"
-        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:name="eg.iti.weatherapp.main.ui.home.HomeFragment"
         android:label="@string/alerts"
         tools:layout="@layout/home_fragment" />
 

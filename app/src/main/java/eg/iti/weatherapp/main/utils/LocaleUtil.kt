@@ -129,7 +129,7 @@ class LocaleUtil  {
                         '7' -> en = '٧'
                         '8' -> en = '۸'
                         '9' -> en = '۹'
-                        else ->en = ','
+                        '.' -> en = ','
                     }
                     result = "${result}$en"
                 }
@@ -137,16 +137,17 @@ class LocaleUtil  {
         }
 
          fun getCityName(lat: Double, lon: Double ,context: Context ): String {
-            val city :String
+            var city :String
             val geocoder = Geocoder(context, Locale.getDefault())
             val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
             if (addresses.isNotEmpty()) {
                 val state = addresses[0].adminArea
                 val country = addresses[0].countryName
                 city = "$state / $country"
+                return city
             }
              else return context.getString(R.string.def)
-            return city
+
         }
     }
 }

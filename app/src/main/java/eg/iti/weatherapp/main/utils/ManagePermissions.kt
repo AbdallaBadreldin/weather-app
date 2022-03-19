@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import eg.iti.weatherapp.R
 import eg.iti.weatherapp.main.ui.location.PickLocationFragment
 import eg.iti.weatherapp.main.ui.location.toast
 
@@ -15,7 +16,7 @@ class ManagePermissions(val activity: Activity, val list: List<String>, val code
         if (isPermissionsGranted() != PackageManager.PERMISSION_GRANTED) {
             showAlert()
         } else {
-            activity.toast("Permissions already granted.")
+            activity.toast(activity.getString(R.string.permission_already_granted))
         }
     }
 
@@ -45,10 +46,10 @@ class ManagePermissions(val activity: Activity, val list: List<String>, val code
     // Show alert dialog to request permissions
     private fun showAlert() {
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle("Need permission(s)")
-        builder.setMessage("Some permissions are required to do the task.")
-        builder.setPositiveButton("OK", { dialog, which -> requestPermissions() })
-        builder.setNeutralButton("Cancel", null)
+        builder.setTitle(activity.getString(R.string.need_permission))
+        builder.setMessage(activity.getString(R.string.need_permissions_to_continue))
+        builder.setPositiveButton(activity.getString(R.string.ok), { dialog, which -> requestPermissions() })
+        builder.setNeutralButton(activity.getString(R.string.cancel), null)
         val dialog = builder.create()
         dialog.show()
     }
@@ -59,7 +60,7 @@ class ManagePermissions(val activity: Activity, val list: List<String>, val code
         val permission = deniedPermission()
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Show an explanation asynchronously
-            activity.toast("Should show an explanation.")
+            activity.toast(activity.getString(R.string.use_another_way))
         } else {
             ActivityCompat.requestPermissions(activity, list.toTypedArray(), code)
         }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,341 +16,354 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/homeSwipeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="56dp"
-            tools:context=".main.ui.home.HomeFragmemnt">
+            tools:context=".main.ui.home.HomeFragment">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_main_constraint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="750dp">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/timezone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    tools:layout_editor_absoluteX="148dp"
-                    tools:layout_editor_absoluteY="51dp" />
+                <LinearLayout
 
-                <TextView
-                    android:id="@+id/dt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    tools:layout_editor_absoluteX="147dp"
-                    tools:layout_editor_absoluteY="96dp" />
-
-
-                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="48dp"
-                    app:cardCornerRadius="90dp"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="156dp">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/gradient_background"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/weather_discription"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:padding="8dp" />
-
-                        <TextView
-                            android:id="@+id/temp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:padding="8dp" />
-
-                        <ImageView
-                            android:id="@+id/home_current_weatherIcon"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="16dp"
-                            tools:layout_editor_absoluteX="128dp"
-                            tools:layout_editor_absoluteY="217dp"
-                            tools:src="@tools:sample/avatars" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:cardCornerRadius="90dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/timezone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:orientation="vertical"
-                        android:weightSum="2">
+                        android:padding="8dp"
+                        android:textSize="@dimen/home_text_size_headers"
+                        tools:layout_editor_absoluteX="148dp"
+                        tools:layout_editor_absoluteY="51dp" />
+
+                    <TextView
+                        android:id="@+id/dt"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:padding="8dp"
+                        android:textSize="@dimen/home_text_size_headers"
+                        tools:layout_editor_absoluteX="147dp"
+                        tools:layout_editor_absoluteY="96dp" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="48dp"
+                        app:cardCornerRadius="90dp"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:layout_editor_absoluteY="156dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+                            android:layout_gravity="center"
+                            android:background="@drawable/gradient_background"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                            <LinearLayout
+
+                            <TextView
+                                android:id="@+id/weather_discription"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="8dp"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:textSize="@dimen/home_text_size_headers" />
 
-                                <ImageView
-                                    android:id="@+id/imageView3"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_pressure_gauge_svgrepo_com"
-                                    tools:src="@tools:sample/avatars" />
-
-                                <TextView
-                                    android:id="@+id/pressure"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
-
-                                <TextView
-                                    android:id="@+id/pressureText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/pressure" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/temp"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="8dp"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:textSize="@dimen/home_text_size_bigHeaders" />
 
-                                <ImageView
-                                    android:id="@+id/imageView4"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_humidity_svgrepo_com"
-                                    tools:src="@tools:sample/avatars" />
+                            <ImageView
+                                android:foregroundGravity="bottom"
+                                android:id="@+id/home_current_weatherIcon"
+                                android:layout_width="128dp"
+                                android:layout_height="128dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="16dp"
+                                tools:layout_editor_absoluteX="128dp"
+                                tools:layout_editor_absoluteY="217dp"
+                                tools:src="@tools:sample/avatars"
+                                android:baselineAlignBottom="true"/>
 
-                                <TextView
-                                    android:id="@+id/humidity"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
-
-                                <TextView
-                                    android:id="@+id/humidityText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/humidity" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageView5"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_wind_svgrepo_com"
-                                    tools:src="@tools:sample/avatars" />
-
-                                <TextView
-                                    android:id="@+id/wind"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
-
-                                <TextView
-                                    android:id="@+id/windText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/wind" />
-                            </LinearLayout>
                         </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        app:cardCornerRadius="90dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+                            android:layout_margin="8dp"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:orientation="horizontal"
+                                android:weightSum="3">
 
-                                <ImageView
-                                    android:id="@+id/imageView6"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_cloud_svgrepo_com"
-                                    tools:src="@tools:sample/avatars" />
-
-                                <TextView
-                                    android:id="@+id/cloud"
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/cloudText"
+                                    <ImageView
+                                        android:id="@+id/imageView3"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_pressure_gauge_svgrepo_com"
+                                        tools:src="@tools:sample/avatars" />
+
+                                    <TextView
+                                        android:id="@+id/pressure"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/pressureText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/pressure" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/cloud" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_humidity_svgrepo_com"
+                                        tools:src="@tools:sample/avatars" />
+
+                                    <TextView
+                                        android:id="@+id/humidity"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/humidityText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/humidity" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView5"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_wind_svgrepo_com"
+                                        tools:src="@tools:sample/avatars" />
+
+                                    <TextView
+                                        android:id="@+id/wind"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/windText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/wind" />
+                                </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:orientation="horizontal"
+                                android:weightSum="3">
 
-                                <ImageView
-                                    android:id="@+id/imageView7"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_sun_wireless_outline"
-                                    tools:src="@tools:sample/avatars" />
-
-                                <TextView
-                                    android:id="@+id/ultraViolet"
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/ultraVioletText"
+                                    <ImageView
+                                        android:id="@+id/imageView6"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_cloud_svgrepo_com"
+                                        tools:src="@tools:sample/avatars" />
+
+                                    <TextView
+                                        android:id="@+id/cloud"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/cloudText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/cloud" />
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/ultra_violet" />
-                            </LinearLayout>
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                    <ImageView
+                                        android:id="@+id/imageView7"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_sun_wireless_outline"
+                                        tools:src="@tools:sample/avatars" />
 
-                                <ImageView
-                                    android:id="@+id/imageView8"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    app:srcCompat="@drawable/ic_visibility_eye_svgrepo_com"
-                                    tools:src="@tools:sample/avatars" />
+                                    <TextView
+                                        android:id="@+id/ultraViolet"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
 
-                                <TextView
-                                    android:id="@+id/visibility"
+                                    <TextView
+                                        android:id="@+id/ultraVioletText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/ultra_violet" />
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/visibilityText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="8dp"
-                                    android:gravity="center"
-                                    android:text="@string/visibility" />
+                                    <ImageView
+                                        android:id="@+id/imageView8"
+                                        android:layout_width="48dp"
+                                        android:layout_height="48dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        app:srcCompat="@drawable/ic_visibility_eye_svgrepo_com"
+                                        tools:src="@tools:sample/avatars" />
+
+                                    <TextView
+                                        android:id="@+id/visibility"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center" />
+
+                                    <TextView
+                                        android:id="@+id/visibilityText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="8dp"
+                                        android:gravity="center"
+                                        android:text="@string/visibility" />
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/hourlyRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/hourlyRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/dailyRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal" />
-            </LinearLayout>
-
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/dailyRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
 

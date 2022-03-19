@@ -67,13 +67,18 @@ class FavouriteAdapter(viewModel: FavouriteViewModel) :RecyclerView.Adapter<Favo
         holder.deleteImage.setOnClickListener { viewModel.deleteLocation(locationDetails,context)  }  //delete from data base using location details
         holder.card.setOnClickListener{
             val editor:SharedPreferences.Editor =  sharedPreferences.edit()
-            editor.putString(context.getString(R.string.preference_longitude), locationDetails.locationLongtuide.toString())
-            editor.putString(context.getString(R.string.preference_alatitude), locationDetails.locationLatetuide.toString())
+            editor.putString(context.getString(R.string.preference_longitude), locationDetails.locationLongtuide)
+            editor.putString(context.getString(R.string.preference_alatitude), locationDetails.locationLatetuide)
             editor.apply()
             editor.commit()
             context.toast(context.getString(R.string.city_picked))
         }     //set those data to shared preferences and recreate activity
-        holder.cityName.text=locationDetails.locationCountryName
+        var timeZone = LocaleUtil.getCityName(lat =locationDetails.locationLatetuide.toDouble() ,lon =locationDetails.locationLongtuide.toDouble(),context)
+        if (timeZone == context.getString(eg.iti.weatherapp.R.string.def))
+           holder.cityName.text = locationDetails.locationCountryName
+        else
+        holder.cityName.text=timeZone
+
     }
 
     override fun getItemCount(): Int = locations.size

@@ -14,12 +14,10 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import eg.iti.weatherapp.R
 import eg.iti.weatherapp.databinding.FavouriteFragmentBinding
-import eg.iti.weatherapp.databinding.HomeFragmentBinding
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
-import eg.iti.weatherapp.main.ui.home.HomeFragmemntViewModel
 
 class FavouriteFragment : Fragment() {
     private var _binding: FavouriteFragmentBinding? = null

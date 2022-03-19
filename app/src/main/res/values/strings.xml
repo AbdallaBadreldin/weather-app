@@ -44,20 +44,36 @@
 
     <string name="no_stored_data">no stored data</string>
     <string name="need_internet">error need internet connection</string>
-    <string name="saturday">Saturday</string>
-    <string name="sunday">Sunday</string>
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuseday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">thursday</string>
-    <string name="friday">Friday</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tus</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">thu</string>
+    <string name="friday">Fri</string>
     <string name="about_phrase">this app made under the copy right of ITI @ EG \n under supervision of Eng/Ahmed Mazen and Eng/Heba \n I wish you taset new experience and be happy :)</string>
     <string name="feature_not_available">this feature not available ;)</string>
-    <string name="picked_location">Picked_location</string>
+    <string name="picked_location" translatable="false">Picked_location</string>
     <string name="confirm_location">Confirm Location</string>
     <string name="map">map</string>
     <string name="favourite_map">favourite map</string>
     <string name="city_picked">city picked</string>
+    <string name="percent_qoutation">%</string>
+    <string name="hpa_qoutation">hpa</string>
+    <string name="meter">meter</string>
+    <string name="unit_kelvin">°K</string>
+    <string name="unit_celsuis">°C</string>
+    <string name="unit_fahrenhiet">°F</string>
+    <string name="meter_per_sec">M/S</string>
+    <string name="mile_per_hour">M/H</string>
+    <string name="permission_granted">permission granted</string>
+    <string name="need_permission">need permission</string>
+    <string name="permission_already_granted">permission already granted</string>
+    <string name="use_another_way">use another way to fetch for weather</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="need_permissions_to_continue">Some permissions are required to continue</string>
+    <string name="enable_gps">Enable gps or use another way</string>
 
 
 </resources>

@@ -6,8 +6,8 @@ import retrofit2.Call
 
 class RemoteSource : RemoteSourceInterface {
 
-override fun getCurrent(lat:String, lon:String, unit:String, lang:String, API:String): Call<WeatherResponse> {
-    return retrofitService.getCurrentByLocation(lat,lon,unit,lang,API)
+override fun getCurrent(lat:String, lon:String, lang:String, API:String): Call<WeatherResponse> {
+    return retrofitService.getCurrentByLocation(lat,lon,lang,API)
 }
 
 

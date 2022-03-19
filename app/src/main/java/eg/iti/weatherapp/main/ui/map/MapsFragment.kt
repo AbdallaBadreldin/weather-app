@@ -53,7 +53,7 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_maps, container, false)
+        var view = inflater.inflate(R.layout.fragment_maps, container, false)
         //shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 

@@ -18,8 +18,8 @@ class MainRepository ( private val localSource: LocalSource,private val remoteSo
 //private val localSource = initializeDB(context = context) as LocalSourceInterface
 
   //online
-    fun getCurrentWeatherByLocation(lat:String,lon:String,unit:String,lang:String,API:String)
-= remoteSource.getCurrent(lat,lon,unit,lang,API)
+    fun getCurrentWeatherByLocation(lat:String,lon:String,lang:String,API:String)
+= remoteSource.getCurrent(lat,lon,lang,API)
 
 
     //offline weatherResponse

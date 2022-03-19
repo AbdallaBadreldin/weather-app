@@ -14,7 +14,7 @@ interface RetrofitService {
 
 //    exclude=hourly,daily ,minutly
     @GET("onecall?exclude=minutely")
-    fun getCurrentByLocation(@Query("lat")lat:String, @Query("lon")lon:String, @Query("units")unit:String, @Query("lang")lang:String, @Query("appid")API :String) : Call<WeatherResponse>
+    fun getCurrentByLocation(@Query("lat")lat:String, @Query("lon")lon:String,  @Query("lang")lang:String, @Query("appid")API :String) : Call<WeatherResponse>
 
 
 //    @GET("movielist.json")

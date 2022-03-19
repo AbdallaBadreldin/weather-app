@@ -75,7 +75,7 @@ viewModel.insertLocation(
     location = Location(
     latLong.latitude.toString(),
     latLong.longitude.toString(),
-   LocaleUtil.getCityName(lat = latLong.latitude , lon = latLong.longitude,requireContext())
+   LocaleUtil.getCityName(lat = latLong.latitude , lon = latLong.longitude ,requireContext())
 )
 ,requireContext())
 

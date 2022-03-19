@@ -5,6 +5,7 @@ import eg.iti.weatherapp.main.data.model.Daily
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import eg.iti.weatherapp.R
@@ -12,6 +13,7 @@ import eg.iti.weatherapp.databinding.CustomRowDailyBinding
 import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.ui.home.DailyAdapter
 import eg.iti.weatherapp.main.utils.LocaleUtil
+import java.math.MathContext
 
 class DailyAdapter: RecyclerView.Adapter<MainViewHolder>() {
 
@@ -34,8 +36,20 @@ lateinit var context : Context
 
         holder.binding.dailyDay.text = pickDay(position)
         holder.binding.dailyDec.text= weatherDetail.weather[0].description
-        holder.binding.dailyDegFeel.text= "${LocaleUtil.translateEnglishToArabic(weatherDetail.temp.max,context)} / ${LocaleUtil.translateEnglishToArabic(weatherDetail.temp.min,context)}"
+        holder.binding.dailyDegFeel.text= "${LocaleUtil.translateEnglishToArabic(convertTempAsSharedPreferences(weatherDetail.temp.max),context)} / ${LocaleUtil.translateEnglishToArabic(convertTempAsSharedPreferences(weatherDetail.temp.min),context)}"
         holder.binding.dailyImage.setImageResource(pickPhoto(weatherDetail.weather[0].icon))
+    }
+    fun  convertTempAsSharedPreferences(temp :String ) :String{
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val tempo =sharedPreferences.getString(context.getString(eg.iti.weatherapp.R.string.preference_temperature),context.getString(eg.iti.weatherapp.R.string.pref_kelvin))
+        when(tempo){
+            context.getString(eg.iti.weatherapp.R.string.pref_kelvin) -> return temp + context.getString(eg.iti.weatherapp.R.string.unit_kelvin)
+            context.getString(eg.iti.weatherapp.R.string.pref_celsius) -> return (temp.toDouble() -273.15).toBigDecimal(
+                MathContext(2) ).toString() + context.getString(eg.iti.weatherapp.R.string.unit_celsuis) //°C
+            context.getString(eg.iti.weatherapp.R.string.pref_fahrenheit) -> return ((temp.toDouble() * 9/5 - 459.67).toBigDecimal(
+                MathContext(2) )).toString() + context.getString(eg.iti.weatherapp.R.string.unit_fahrenhiet)
+        }
+        return temp
     }
 
     fun pickDay(dayNum :Int): String {

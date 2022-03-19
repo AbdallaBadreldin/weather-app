@@ -37,6 +37,5 @@
     </string-array>
 
 
-    <string name="meter_per_sec">Meter/Sec</string>
-    <string name="mile_per_hour">Mile/Hour</string>
+
 </resources>

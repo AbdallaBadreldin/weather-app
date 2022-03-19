@@ -25,8 +25,8 @@
     <string name="alerts">تنبيهات</string>
     <string name="about">اعرف عنا</string>
     <string name="choose_application_language">اختر لغة التطبيق</string>
-    <string name="mile_per_hour">ميل / ساعة</string>
-    <string name="meter_per_sec">متر / ثانية</string>
+    <string name="mile_per_hour">م/س</string>
+    <string name="meter_per_sec">م/ث</string>
     <string name="no_stored_data">لا يوجد بيانات</string>
     <string name="choose_wind_speed">اختر طريقة عرض السرعة</string>
     <string name="wind_speed">سرعة الرياح</string>
@@ -35,4 +35,23 @@
     <string name="celsius">سليزيس</string>
     <string name="choose_temperature">اختر طريقة عرض درجة الحرارة</string>
     <string name="format">صيغة</string>
+    <string name="need_internet">خطأ نحتاج الى اتصال بالانترنت</string>
+    <string name="saturday">السبت</string>
+    <string name="sunday">الاحد</string>
+    <string name="monday">الاثنين</string>
+    <string name="tuesday">الثلاثاء</string>
+    <string name="wednesday">الاربعاء</string>
+    <string name="thursday">الخميس</string>
+    <string name="friday">الجمعة</string>
+    <string name="feature_not_available">هذه الخاصية غير متوفرة</string>
+    <string name="confirm_location">اكد هذا الاختيار</string>
+    <string name="map">الخريطة</string>
+    <string name="favourite_map">خريطة البلد المفضلة</string>
+    <string name="city_picked">تم اختيار البلد</string>
+    <string name="percent_qoutation">%</string>
+    <string name="hpa_qoutation">"باسكال "</string>
+    <string name="meter">م</string>
+    <string name="unit_kelvin">ك°</string>
+    <string name="unit_celsuis">س°</string>
+    <string name="unit_fahrenhiet">ف°</string>
 </resources>
