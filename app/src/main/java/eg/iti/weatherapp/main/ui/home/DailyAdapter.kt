@@ -71,7 +71,7 @@ lateinit var context : Context
             "13n" -> return R.drawable.thirteen_n
             "50d" -> return R.drawable.fifty_d
             "50n" -> return R.drawable.fifty_n
-           else ->  return R.drawable.twon
+           else ->  return R.drawable.oned
         }
     }
     override fun getItemCount(): Int {

@@ -34,6 +34,7 @@ import eg.iti.weatherapp.main.ui.location.toast
 import eg.iti.weatherapp.main.utils.DateUtils
 import eg.iti.weatherapp.main.utils.LocaleUtil
 import eg.iti.weatherapp.main.utils.LocaleUtil.Companion.translateEnglishToArabic
+import retrofit2.Response.error
 import java.util.*
 
 
@@ -45,15 +46,14 @@ class HomeFragmemnt : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
     private lateinit var viewModel: HomeFragmemntViewModel
+    private lateinit  var sharedPreferences :SharedPreferences
 
-    companion object {
-        fun newInstance() = HomeFragmemnt()
-        fun oldInstance() = this
-    }
+    /*  companion object {
+          fun newInstance() = HomeFragmemnt()
+          fun oldInstance() = this
+      }*/
 
-   private lateinit  var sharedPreferences :SharedPreferences
     lateinit var swipeContainer: SwipeRefreshLayout
 
     lateinit var txtWeather_discription: TextView
@@ -67,7 +67,7 @@ class HomeFragmemnt : Fragment() {
     lateinit var txtDt: TextView
     lateinit var txtTemp: TextView
     lateinit var imgWeatherIcon: ImageView
-    lateinit var failedStr: String
+
     val dailyAdapter = DailyAdapter()
     val hourlyAdapter = HourlyAdapter()
 
@@ -152,7 +152,7 @@ class HomeFragmemnt : Fragment() {
             swipeContainer.isRefreshing = false
         }
         viewModel.errorMessage.observe(requireActivity(), Observer {
-            context?.toast(it)
+            context?.toast(getString(eg.iti.weatherapp.R.string.need_internet))
 
             viewModel.getOfflineStoredData(requireContext()).observe(viewLifecycleOwner)
             {
@@ -173,8 +173,12 @@ class HomeFragmemnt : Fragment() {
     }
 
     fun setDataIntoLayout(it: WeatherResponse?) {
-
+  var timeZone =LocaleUtil.getCityName(it!!.lat.toDouble() , it.lon.toDouble(),requireContext() )
+        if (timeZone == getString(eg.iti.weatherapp.R.string.def))
           txtTimezone.text = it?.timeZone
+        else
+            txtTimezone.text = timeZone
+
         txtDt.text =
             it?.current?.dayTime?.let { it1 ->
                 DateUtils.convertDate(it1.toLong(),Locale.getDefault())
@@ -200,6 +204,7 @@ class HomeFragmemnt : Fragment() {
     override fun onResume() {
         super.onResume()
         activity?.window?.decorView?.layoutDirection = Locale.getDefault().layoutDirection
+   fetchTimelineAsync()
     }
 
     fun setupSideDrawer() {
@@ -213,9 +218,6 @@ class HomeFragmemnt : Fragment() {
         val navView: NavigationView = binding.homeNavView
 
         val navController = this.findNavController()
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        var menu :Menu = binding.
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(

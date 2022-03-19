@@ -1,28 +1,42 @@
-package eg.iti.weatherapp.main.ui.map
+package eg.iti.weatherapp.main.ui.favouritemap
 
 import android.content.SharedPreferences
+import androidx.fragment.app.Fragment
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import androidx.navigation.ActionOnlyNavDirections
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
+
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import eg.iti.weatherapp.R
+import eg.iti.weatherapp.main.data.model.Location
+import eg.iti.weatherapp.main.data.repository.MainRepository
+import eg.iti.weatherapp.main.data.retrofit.RemoteSource
+import eg.iti.weatherapp.main.data.room.LocalSource
+import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
+import eg.iti.weatherapp.main.ui.favourite.FavouriteViewModel
+import eg.iti.weatherapp.main.utils.LocaleUtil
 
+class FavouriteMapFragment : Fragment()   {
 
-class MapsFragment : Fragment(),  OnMapReadyCallback {
     lateinit var mapBtn: Button
     lateinit var latLong: LatLng
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var viewModel: FavouriteMapViewModel
     private val callback = OnMapReadyCallback { googleMap ->
         googleMap.setOnMapClickListener {
             latLong = it
@@ -34,17 +48,6 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
                     .title(getString(R.string.picked_location))
             )
         }
-
-
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
     }
 
 
@@ -53,37 +56,40 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_maps, container, false)
+        val view = inflater.inflate(R.layout.fragment_favourite_map, container, false)
         //shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-
-        mapBtn = view.findViewById(R.id.map_button)
-        mapBtn.setOnClickListener {
-
-//            action_map_to_home
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-
-            editor.putString(
-                getString(R.string.preference_longitude),
-                latLong?.longitude.toString()
+        viewModel = ViewModelProvider(
+            this, MyViewModelFactory(
+                MainRepository(
+                    LocalSource(),
+                    RemoteSource()
+                )
             )
-            editor.putString(getString(R.string.preference_alatitude), latLong?.latitude.toString())
-            editor.apply()
-            editor.commit()
-            findNavController().navigate(ActionOnlyNavDirections(R.id.action_map_to_home)) //for test purposal only
+        ).get(FavouriteMapViewModel::class.java)
+
+
+        mapBtn = view.findViewById(R.id.fav_map_button)
+        mapBtn.setOnClickListener {
+viewModel.insertLocation(
+    location = Location(
+    latLong.latitude.toString(),
+    latLong.longitude.toString(),
+   LocaleUtil.getCityName(lat = latLong.latitude , lon = latLong.longitude,requireContext())
+)
+,requireContext())
+
+Navigation.findNavController(view).navigateUp()
+
         }
         return view
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        val mapFragment = childFragmentManager.findFragmentById(R.id.fav_map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
 
 }

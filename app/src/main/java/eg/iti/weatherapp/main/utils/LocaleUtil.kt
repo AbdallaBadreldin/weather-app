@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.LocaleList
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -132,6 +134,19 @@ class LocaleUtil  {
                     result = "${result}$en"
                 }
             return result
+        }
+
+         fun getCityName(lat: Double, lon: Double ,context: Context ): String {
+            val city :String
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
+            if (addresses.isNotEmpty()) {
+                val state = addresses[0].adminArea
+                val country = addresses[0].countryName
+                city = "$state / $country"
+            }
+             else return context.getString(R.string.def)
+            return city
         }
     }
 }

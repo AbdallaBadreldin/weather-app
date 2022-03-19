@@ -55,6 +55,9 @@
     <string name="feature_not_available">this feature not available ;)</string>
     <string name="picked_location">Picked_location</string>
     <string name="confirm_location">Confirm Location</string>
+    <string name="map">map</string>
+    <string name="favourite_map">favourite map</string>
+    <string name="city_picked">city picked</string>
 
 
 </resources>

@@ -2,6 +2,7 @@ package eg.iti.weatherapp.main.data.repository
 
 import android.content.Context
 import androidx.annotation.WorkerThread
+import eg.iti.weatherapp.main.data.model.Location
 import eg.iti.weatherapp.main.data.model.Weather
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
@@ -21,22 +22,42 @@ class MainRepository ( private val localSource: LocalSource,private val remoteSo
 = remoteSource.getCurrent(lat,lon,unit,lang,API)
 
 
-    //offline
+    //offline weatherResponse
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    fun getAllWeatherResponseFromDataBAse (context: Context) : Flow<List<WeatherResponse>> =
+        localSource.getAllWeatherResponse(context = context)
+
+
     fun insertWeatherResponseToDatabase(weather: WeatherResponse ,context: Context) {
         localSource.insertWeatherResponse(weather,context)
     }
 
-    fun deleteWeatherResponseFromDatabase(weather :WeatherResponse,context:Context) {
-        localSource.deleteWeatherResponse(weather,  context)
-    }
-    fun deleteCurrentWeather(context: Context){
-        localSource.deleteAllCurrentWeatherResponse(context)
+
+    fun clearAllWeatherResponseData(context: Context){
+        localSource.deleteAllWeatherResponseData(context)
     }
 
+    //offline favourite stored location data
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-   fun getCurrentWeatherFromDataBase (context: Context) : Flow<List<WeatherResponse>> =
-       localSource.getCurrentWeather(context = context)
+    fun getAllLocationFromDataBAse (context: Context) : Flow<List<Location>> =
+        localSource.getAllLocations(context = context)
+
+
+    fun insertLocationToDatabase(location: Location ,context: Context) {
+        localSource.insertLocation(location ,context)
+    }
+
+    fun deleteLocation(location:Location , context: Context){
+        localSource.deleteLocation(location,context)
+    }
+
+
+//    fun deleteWeatherResponseFromDatabase(weather :WeatherResponse,context:Context) {
+//        localSource.deleteWeatherResponse(weather,  context)
+//    }
+
 
 
 

@@ -10,16 +10,24 @@ import retrofit2.http.DELETE
 interface WeatherDao {
 
     @Query("SELECT * FROM WeatherResponse")
-    fun getAllOfflineData(): Flow<List<WeatherResponse>>
+    fun getAllWeatherResponse(): Flow<List<WeatherResponse>>
 
-    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 1")
-    fun getFavouriteWeather():  Flow<List<WeatherResponse>>
-
-    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 0")
-    fun getCurrentWeather(): Flow<List<WeatherResponse>>
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeatherResponse(weather: WeatherResponse)
+
+    //dangerous command which will always be used :) nuke all data all over THE DATABASE LIKE A SMALL PIECE OF BUG CRASHED BY A PANZER FROM HELL ..
+    @Query("DELETE FROM WeatherResponse")
+    fun clearAllWeatherResponse()
+
+
+
+//    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 1")
+//    fun getFavouriteWeather():  Flow<List<WeatherResponse>>
+//
+//    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 0")
+//    fun getCurrentWeather(): Flow<List<WeatherResponse>>
+
+
 
     @Delete
     fun delete(weather: WeatherResponse)
@@ -33,7 +41,5 @@ interface WeatherDao {
 //    @Query("DELETE FROM WeatherResponse WHERE favourite Like 0")
 //    fun deleteAllCurrent()
 
-    //dangerous command which will always be used :) nuke all data all over THE DATABASE LIKE A SMALL PIECE OF BUG CRASHED BY A PANZER FROM HELL ..
-    @Query("DELETE FROM WeatherResponse")
-    fun clearALLOfflineData()
+
 }

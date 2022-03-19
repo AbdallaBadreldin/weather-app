@@ -62,7 +62,7 @@ class HomeFragmemntViewModel(private val mainRepository: MainRepository) : ViewM
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>
             ) {
-                mainRepository.deleteCurrentWeather(context)
+                mainRepository.clearAllWeatherResponseData(context)
                 mainRepository.insertWeatherResponseToDatabase(response.body()!!, context)
                 currentWeather.postValue(response.body())
             }
@@ -75,7 +75,10 @@ class HomeFragmemntViewModel(private val mainRepository: MainRepository) : ViewM
     }
 
     fun getOfflineStoredData(context : Context) : LiveData<List<WeatherResponse>>
-    =mainRepository.getCurrentWeatherFromDataBase(context = context).asLiveData()
+    =mainRepository.getAllWeatherResponseFromDataBAse(context = context).asLiveData()
+
+
+
 //        var temp:List<WeatherResponse>
 
 //             mainRepository.getCurrentWeatherFromDataBase(context.requireContext()).

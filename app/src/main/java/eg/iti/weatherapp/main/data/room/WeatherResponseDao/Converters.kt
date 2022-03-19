@@ -10,9 +10,6 @@ import java.lang.reflect.Type
 @ProvidedTypeConverter
 class Converters {
 
-
-
-
     @TypeConverter
     fun fromHourlyToString(hourly: List<Hourly>): String {
         return Gson().toJson(hourly)

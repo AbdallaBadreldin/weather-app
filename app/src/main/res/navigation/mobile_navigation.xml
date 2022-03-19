@@ -58,13 +58,28 @@
 
     <fragment
         android:id="@+id/navigation_favourite"
-        android:name="eg.iti.weatherapp.main.ui.home.HomeFragmemnt"
+        android:name="eg.iti.weatherapp.main.ui.favourite.FavouriteFragment"
         android:label="@string/favourites"
+        tools:layout="@layout/favourite_fragment" >
+<!--        <action-->
+<!--            android:id="@+id/action_from_favourite_to_map"-->
+<!--            app:destination="@id/navigation_favourite_map"-->
+<!--            app:launchSingleTop="true"-->
+<!--            app:popUpTo="@id/navigation_welcome"-->
+<!--            app:popUpToInclusive="false" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favourite_map"
+        android:name="eg.iti.weatherapp.main.ui.favouritemap.FavouriteMapFragment"
+        android:label="@string/favourite_map"
         tools:layout="@layout/home_fragment" />
+
+
     <fragment
         android:id="@+id/navigation_map"
         android:name="eg.iti.weatherapp.main.ui.map.MapsFragment"
-        android:label="@string/favourites"
+        android:label="@string/map"
         tools:layout="@layout/home_fragment" >
     <action
         android:id="@+id/action_map_to_home"
