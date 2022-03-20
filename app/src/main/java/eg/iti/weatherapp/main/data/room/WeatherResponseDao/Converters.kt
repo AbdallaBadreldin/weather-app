@@ -90,6 +90,17 @@ class Converters {
         return Gson().fromJson(current, listType)
     }
 
+    @TypeConverter
+    fun fromAlertToString(current: Alert): String {
+        return Gson().toJson(current)
+    }
+
+    @TypeConverter
+    fun fromStringToAlert(current: String): List<Alert?> {
+        val listType: Type = object : TypeToken<List<Alert?>?>() {}.type
+        return Gson().fromJson(current, listType)
+    }
+
 }
 
 

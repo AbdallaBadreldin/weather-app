@@ -23,7 +23,7 @@ class FavouriteFragment : Fragment() {
     private var _binding: FavouriteFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit  var sharedPreferences : SharedPreferences
-    lateinit var  favouriteAdapter :FavouriteAdapter
+    lateinit var  favouriteAdapter :AlertView
 
     private lateinit var viewModel: FavouriteViewModel
 
@@ -45,7 +45,7 @@ class FavouriteFragment : Fragment() {
         _binding = FavouriteFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        favouriteAdapter=FavouriteAdapter(viewModel)
+        favouriteAdapter=AlertView(viewModel)
         binding.favRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = favouriteAdapter

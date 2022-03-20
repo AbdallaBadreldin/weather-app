@@ -2,6 +2,7 @@ package eg.iti.weatherapp.main.data.repository
 
 import android.content.Context
 import androidx.annotation.WorkerThread
+import eg.iti.weatherapp.main.data.model.AlertNotification
 import eg.iti.weatherapp.main.data.model.Location
 import eg.iti.weatherapp.main.data.model.Weather
 import eg.iti.weatherapp.main.data.model.WeatherResponse
@@ -51,6 +52,22 @@ class MainRepository ( private val localSource: LocalSource,private val remoteSo
 
     fun deleteLocation(location:Location , context: Context){
         localSource.deleteLocation(location,context)
+    }
+
+
+    //offline favourite stored alerts data
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    fun getAllAlertsFromDataBAse (context: Context) : Flow<List<AlertNotification>> =
+        localSource.getAllAlerts(context = context)
+
+
+    fun insertAlertToDatabase(alert:AlertNotification,context: Context) {
+        localSource.insertAlert(alert ,context)
+    }
+
+    fun deleteAlert(alert:AlertNotification , context: Context){
+        localSource.deleteAlert(alert,context)
     }
 
 

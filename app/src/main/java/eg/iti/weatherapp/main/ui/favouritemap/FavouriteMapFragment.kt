@@ -68,7 +68,6 @@ class FavouriteMapFragment : Fragment()   {
             )
         ).get(FavouriteMapViewModel::class.java)
 
-
         mapBtn = view.findViewById(R.id.fav_map_button)
         mapBtn.setOnClickListener {
 viewModel.insertLocation(

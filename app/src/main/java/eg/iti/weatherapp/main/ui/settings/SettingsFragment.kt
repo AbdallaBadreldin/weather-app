@@ -18,7 +18,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
         LocaleUtil.applyLocalizedContext(requireActivity(),preferenceManager.sharedPreferences?.getString(getString(R.string.preference_language), getString(R.string.pref_en)).toString())
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-
     }
 
     override fun onResume() {
@@ -32,25 +31,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
-//        if( == "en") {
-//            PreferencesHelper.writeLanguageCode("he")
-//        } else {
-//            PreferencesHelper.writeLanguageCode("en")
-//        }
-//        (activity as? MainActivity)?.recreate()
 
         if (p1 == getString(R.string.preference_language)) {
-//            val myLocale = Locale(p0?.getString(p1, "en"))
-//            val res = resources
-//            val dm = res.displayMetrics
-//            val conf = res.configuration
-//            conf.locale = myLocale
-//            res.updateConfiguration(conf, dm)
-//            (activity as? MainActivity)?.recreate()
             LocaleUtil.applyLocalizedContext(requireActivity(),p0?.getString(p1, getString(R.string.pref_en)).toString())
-            (activity as? MainActivity)?.recreate()
-//            activity?.window?.decorView?.layoutDirection = Locale.getDefault().layoutDirection
         }
+        (activity as? MainActivity)?.recreate()
 
 
     }

@@ -32,14 +32,14 @@ data class WeatherResponse constructor(
     @SerializedName("daily")
     val daily: List<Daily>,
 
-
     @TypeConverters(Converters::class)
     @ColumnInfo(name = "hourly")
     @SerializedName("hourly")
     val hourly: List<Hourly>,
 
-//    @TypeConverters(Converters::class)
-//    @ColumnInfo(name = "favourite")
-//    val favourite:Boolean = false
+    @TypeConverters(Converters::class)
+    @ColumnInfo(name = "alerts")
+    @SerializedName("alerts")
+    val alerts: List<Alert>,
 
 ) : Serializable

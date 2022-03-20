@@ -8,25 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.compose.ui.platform.compositionContext
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import eg.iti.weatherapp.R
-import eg.iti.weatherapp.main.data.model.Hourly
 import eg.iti.weatherapp.main.data.model.Location
-import eg.iti.weatherapp.main.data.repository.MainRepository
-import eg.iti.weatherapp.main.data.retrofit.RemoteSource
-import eg.iti.weatherapp.main.data.room.LocalSource
-import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
 import eg.iti.weatherapp.main.ui.location.toast
-import eg.iti.weatherapp.main.utils.DateUtils
 import eg.iti.weatherapp.main.utils.LocaleUtil
-import java.util.*
 
-class FavouriteAdapter(viewModel: FavouriteViewModel) :RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+class AlertView(viewModel: FavouriteViewModel) :RecyclerView.Adapter<AlertView.ViewHolder>() {
     var locations = mutableListOf<Location>()
     lateinit var context: Context
     private var viewModel: FavouriteViewModel

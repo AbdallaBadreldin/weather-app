@@ -2,6 +2,7 @@ package eg.iti.weatherapp.main.data.room
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import eg.iti.weatherapp.main.data.model.AlertNotification
 import eg.iti.weatherapp.main.data.model.Location
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDataBase
@@ -20,9 +21,9 @@ class LocalSource : LocalSourceInterface {
 
     companion object {
         private var weatherDataBase: WeatherDataBase? = null
-        private var storedWeatherResponse: LiveData<List<WeatherResponse>>? = null
-        private var storedFavouriteWeather: LiveData<List<WeatherResponse>>? = null
-        private var storedCurretWeather: LiveData<List<WeatherResponse>>? = null
+//        private var storedWeatherResponse: LiveData<List<WeatherResponse>>? = null
+//        private var storedFavouriteWeather: LiveData<List<WeatherResponse>>? = null
+//        private var storedCurretWeather: LiveData<List<WeatherResponse>>? = null
 
         fun initializeDB(context: Context): WeatherDataBase = WeatherDataBase.Companion(context)
 
@@ -74,6 +75,25 @@ class LocalSource : LocalSourceInterface {
         weatherDataBase = initializeDB(context = context)
         CoroutineScope(IO).launch {
             weatherDataBase!!.LocationDao().deleteLocation(location)
+        }
+    }
+
+    override fun getAllAlerts(context: Context): Flow<List<AlertNotification>> {
+        weatherDataBase = initializeDB(context = context)
+        return weatherDataBase!!.alertDao().getAllAlerts()
+    }
+
+    override fun insertAlert(alert: AlertNotification, context: Context) {
+        weatherDataBase = initializeDB(context = context)
+        CoroutineScope(IO).launch {
+            weatherDataBase!!.alertDao().insertAlert(alert)
+        }
+    }
+
+    override fun deleteAlert(alert: AlertNotification, context: Context) {
+        weatherDataBase = initializeDB(context = context)
+        CoroutineScope(IO).launch {
+            weatherDataBase!!.alertDao().deleteAlert(alert)
         }
     }
 

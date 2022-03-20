@@ -8,19 +8,25 @@ class DateUtils constructor( ) {
 
     companion object {
 
-
         fun convertDate(time: Long, locale: Locale): String {
             var simpleDateFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss", locale)
             return getDateString(time,simpleDateFormat)
         }
-        fun convertHour(time: Long , locale: Locale):String{
-            var simpleDateFormatForDay = SimpleDateFormat("hh aa", locale)
-            return  getHourString(time,simpleDateFormatForDay)
+        fun convertHour(time: Long , locale: Locale):String {
+            var simpleDateFormatForDay = SimpleDateFormat("h aa", locale)
+            return getDateString(time, simpleDateFormatForDay)
         }
+            fun convertAlertDate(time: Long, locale: Locale): String {
+                var simpleDateFormatForDay = SimpleDateFormat("h:mm aa", locale)
+                return getDateString(time, simpleDateFormatForDay)
+            }
+            fun convertAlertTime(time: Long, locale: Locale): String {
+                var simpleDateFormatForDay = SimpleDateFormat("dd MMMM yyyy", locale)
+                return getDateString(time, simpleDateFormatForDay)
+            }
 
         private fun getDateString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time * 1000L)
 
-        private fun getHourString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time * 1000L)
 
     }
 

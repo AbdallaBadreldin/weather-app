@@ -24,5 +24,6 @@
     <string name="pref_notification_disabled" translatable="false">false</string>
     <string name="map_api_key" translatable="false">AIzaSyDXwSAdkyXfLJih3FvXb2km08_t6_qD2Lk</string>
     <string name="def" translatable="false">default</string>
+    <string name="slash" translatable="false">-</string>
 
 </resources>

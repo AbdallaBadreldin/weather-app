@@ -6,11 +6,12 @@ import eg.iti.weatherapp.main.data.model.*
 
 //@ProvidedTypeConverter
 
-@Database(entities = [WeatherResponse::class ,Location::class], version = 1 , exportSchema = false)
+@Database(entities = [WeatherResponse::class ,Location::class,AlertNotification::class], version = 1 , exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class WeatherDataBase : RoomDatabase() {
     abstract fun weatherDao() : WeatherDao
     abstract fun LocationDao() : LocationDao
+    abstract fun alertDao() :AlertDao
     companion object {
         @Volatile
         private var instance: WeatherDataBase? = null

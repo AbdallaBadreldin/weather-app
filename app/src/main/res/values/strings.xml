@@ -74,6 +74,14 @@
     <string name="cancel">Cancel</string>
     <string name="need_permissions_to_continue">Some permissions are required to continue</string>
     <string name="enable_gps">Enable gps or use another way</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alarm">Alarm</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="save">Save</string>
+    <string name="cannot_choose_past">Can\'t pick time in past</string>
+    <string name="end_time_cannot_be_before_start">end time can\'t be before start date</string>
 
 
 </resources>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    app:layout_marginBaseline="16dp"
+    tools:context=".main.ui.alert.AlertDialogFragment">
+
+
+    <Button
+        android:id="@+id/alert_dialog_saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/save"
+        app:cornerRadius="90dp"
+        app:layout_constraintEnd_toEndOf="@+id/alert_dialog_radioGroup"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/alert_dialog_radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/alert_dialog_radioGroup" />
+
+    <Button
+        android:id="@+id/alert_dialog_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/from"
+        app:cornerRadius="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/alert_dialog_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:text="@string/to"
+        app:cornerRadius="90dp"
+        app:layout_constraintStart_toEndOf="@+id/alert_dialog_from"
+        app:layout_constraintTop_toTopOf="@+id/alert_dialog_from" />
+
+    <RadioGroup
+        android:id="@+id/alert_dialog_radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <RadioButton
+            android:id="@+id/alert_dialog_alarmRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm" />
+
+        <RadioButton
+            android:id="@+id/alert_dialog_notificationRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notification" />
+    </RadioGroup>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="90dp"
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/alert_dialog_from"
+        app:layout_constraintStart_toStartOf="@+id/alert_dialog_from"
+        app:layout_constraintTop_toBottomOf="@+id/alert_dialog_from">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dividerPadding="16dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/alert_dialog_startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/alert_dialog_startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="TextView" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="90dp"
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/alert_dialog_to"
+        app:layout_constraintStart_toStartOf="@+id/alert_dialog_to"
+        app:layout_constraintTop_toBottomOf="@+id/alert_dialog_to">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dividerPadding="16dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/alert_dialog_endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/alert_dialog_endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="TextView" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

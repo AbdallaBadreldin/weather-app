@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navigation_alert"
-        android:name="eg.iti.weatherapp.main.ui.home.HomeFragment"
+        android:name="eg.iti.weatherapp.main.ui.alert.AlertFragment"
         android:label="@string/alerts"
         tools:layout="@layout/home_fragment" />
 
