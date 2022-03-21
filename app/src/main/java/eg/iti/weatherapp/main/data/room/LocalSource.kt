@@ -68,8 +68,8 @@ class LocalSource : LocalSourceInterface {
         weatherDataBase = initializeDB(context = context)
         CoroutineScope(IO).launch {
             weatherDataBase!!.LocationDao().insertLocation(location)
-    }
         }
+    }
 
     override fun deleteLocation(location: Location, context: Context) {
         weatherDataBase = initializeDB(context = context)
@@ -96,6 +96,41 @@ class LocalSource : LocalSourceInterface {
             weatherDataBase!!.alertDao().deleteAlert(alert)
         }
     }
+
+
+    //work manager staff====================
+    override fun getStoredDataForWorkManager(context: Context): List<WeatherResponse> {
+        weatherDataBase = initializeDB(context = context)
+        return  weatherDataBase!!.weatherDao().getAllWeatherResponseForWorkManager()
+    }
+
+    override fun getAllUserAlertsForWorkManager(context: Context): List<AlertNotification> {
+        weatherDataBase = initializeDB(context = context)
+        return  weatherDataBase!!.alertDao().getAllAlertsForWorkManager()
+        }
+
+    override fun getAlertsBetween(
+        startTime: Long,
+        endTime: Long,
+        context: Context
+    ): List<AlertNotification> {
+        weatherDataBase = initializeDB(context = context)
+        return  weatherDataBase!!.alertDao().getAlertsBetweenForWorkManager(startTime,endTime)
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
     /*  override fun deleteWeatherResponse(weatherResponse: WeatherResponse, context: Context) {
           weatherDataBase = initializeDB(context = context)
@@ -138,7 +173,7 @@ class LocalSource : LocalSourceInterface {
 //                 }
 
 
-}
+
 
 /*
         override fun getAllWeather():  LiveData<List<WeatherResponse>> {

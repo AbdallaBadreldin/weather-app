@@ -71,12 +71,19 @@ class MainRepository ( private val localSource: LocalSource,private val remoteSo
     }
 
 
-//    fun deleteWeatherResponseFromDatabase(weather :WeatherResponse,context:Context) {
-//        localSource.deleteWeatherResponse(weather,  context)
-//    }
+//============================================================= for work manager
+fun getAllStoredUsersAlertsForWorkManager(context: Context): List<AlertNotification> {
+return localSource.getAllUserAlertsForWorkManager(context)
+}
+
+    fun getAllStoredWeatherDataForWorkManager(context: Context): List<WeatherResponse> {
+        return localSource.getStoredDataForWorkManager(context)
+    }
 
 
+fun getAlertsBetween(startTime :Long ,endTime: Long,context: Context ): List<AlertNotification> {
+    return localSource.getAlertsBetween(startTime ,endTime ,context)
+}
 
 
-//   }=localSource.getCurrentWeather(context )
 }

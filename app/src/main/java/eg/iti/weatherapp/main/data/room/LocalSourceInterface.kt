@@ -29,6 +29,12 @@ interface LocalSourceInterface  {
     fun deleteAlert(alert: AlertNotification,context: Context)
 
 
+
+    //============== interface for WORKMANGER
+    fun getStoredDataForWorkManager(context: Context): List<WeatherResponse>
+    fun getAllUserAlertsForWorkManager(context: Context): List<AlertNotification>
+    fun getAlertsBetween(startTime:Long,endTime:Long ,context: Context):List<AlertNotification>
+
 //                            fun deleteAllLocations
 
 //    fun getFavourtieWeather(context: Context) :  Flow<List<WeatherResponse>>

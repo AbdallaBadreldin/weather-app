@@ -7,6 +7,7 @@ import eg.iti.weatherapp.main.ui.alert.AlertViewModel
 import eg.iti.weatherapp.main.ui.favourite.FavouriteViewModel
 import eg.iti.weatherapp.main.ui.favouritemap.FavouriteMapViewModel
 import eg.iti.weatherapp.main.ui.home.HomeViewModel
+import eg.iti.weatherapp.main.ui.workmanager.NotificationWorkerViewModel
 
 class MyViewModelFactory constructor(private val repository: MainRepository ): ViewModelProvider.Factory {
 
@@ -18,6 +19,8 @@ class MyViewModelFactory constructor(private val repository: MainRepository ): V
         } else if (modelClass.isAssignableFrom(FavouriteMapViewModel::class.java)) {
             FavouriteMapViewModel(this.repository) as T
         } else if (modelClass.isAssignableFrom(AlertViewModel::class.java)) {
+            AlertViewModel(this.repository) as T
+        } else if (modelClass.isAssignableFrom(NotificationWorkerViewModel::class.java)) {
             AlertViewModel(this.repository) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:layout_margin="8dp"
     app:circularflow_radiusInDP="50dp"
     app:cardCornerRadius="90dp"
     xmlns:android="http://schemas.android.com/apk/res/android"

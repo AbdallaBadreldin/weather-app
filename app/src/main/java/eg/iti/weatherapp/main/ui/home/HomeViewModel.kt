@@ -51,6 +51,7 @@ class HomeViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
                 errorMessage.postValue(t.message)
+                getOfflineStoredData(context)
             }
         })
     }

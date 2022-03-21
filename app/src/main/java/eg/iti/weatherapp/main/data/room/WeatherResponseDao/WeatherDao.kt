@@ -20,26 +20,16 @@ interface WeatherDao {
     fun clearAllWeatherResponse()
 
 
-
-//    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 1")
-//    fun getFavouriteWeather():  Flow<List<WeatherResponse>>
-//
-//    @Query("SELECT * FROM WeatherResponse WHERE favourite LIKE 0")
-//    fun getCurrentWeather(): Flow<List<WeatherResponse>>
-
-
-
     @Delete
     fun delete(weather: WeatherResponse)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateWeather(vararg weather: WeatherResponse)
 
-//    @Query("DELETE FROM WeatherResponse WHERE favourite Like 1")
-//    fun deleteAllFavourite()
-//
-//    @Query("DELETE FROM WeatherResponse WHERE favourite Like 0")
-//    fun deleteAllCurrent()
+
+    //==================WorkManager Staff==================
+    @Query("SELECT * FROM WeatherResponse")
+    fun getAllWeatherResponseForWorkManager() : List<WeatherResponse>
 
 
 }

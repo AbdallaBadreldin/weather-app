@@ -90,14 +90,46 @@ class Converters {
         return Gson().fromJson(current, listType)
     }
 
+//    @TypeConverter
+//    fun fromAlertToString(alert: List<Alert?>): String {
+//        if(alert.isNullOrEmpty() || al)
+//            Gson().toJson(  arrayOf(Alert("fake,",1,"1","fake",1, arrayListOf("fake")) ).toList() )
+//        if (alert==null)
+//            return "\"alerts\":[{\"sender_name\":\"\",\"event\":\"Other dangers\",\"start\":1,\"end\":1,\"description\":\"\",\"tags\":[]}]"
+//        if(alert.isNullOrEmpty()||alert.size==0 || alert==null)
+//        return "\"alerts\":[{\"sender_name\":\"\",\"event\":\"Other dangers\",\"start\":1,\"end\":1,\"description\":\"\",\"tags\":[]}]"
+//        return Gson().toJson(alert)
+//    }
+//
+//    @TypeConverter
+//    fun fromStringToAlert(alert: String): List<Alert> {
+//        val listType: Type = object : TypeToken<List<Alert>?>() {}.type
+//        return Gson().fromJson(alert, listType)
+//    }
+    //=======================================================
+    val gson = Gson()
+
     @TypeConverter
-    fun fromAlertToString(current: Alert): String {
+    fun arrayListToJson(list: List<Alert>?): String? {
+        return if(list == null) gson.toJson( ArrayList<Alert>(0) ) else gson.toJson(list)
+    }
+
+    @TypeConverter
+    fun jsonToArrayList(jsonData: String?): List<Alert>? {
+        return if (jsonData == null) null else gson.fromJson(jsonData, object : TypeToken<List<Alert>?>() {}.type)
+    }
+
+
+    @TypeConverter
+    fun fromtagToString(current: List<String>): String {
+//        if(current.isNullOrEmpty())
+
         return Gson().toJson(current)
     }
 
     @TypeConverter
-    fun fromStringToAlert(current: String): List<Alert?> {
-        val listType: Type = object : TypeToken<List<Alert?>?>() {}.type
+    fun fromStringTotag(current: String): List<String> {
+        val listType: Type = object : TypeToken<List<String?>?>() {}.type
         return Gson().fromJson(current, listType)
     }
 

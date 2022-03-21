@@ -8,6 +8,9 @@
 
 
     <TextView
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_text_size_headers"
         android:id="@+id/pickLocation"
         android:layout_width="256dp"
         android:layout_height="wrap_content"

@@ -82,6 +82,11 @@
     <string name="save">Save</string>
     <string name="cannot_choose_past">Can\'t pick time in past</string>
     <string name="end_time_cannot_be_before_start">end time can\'t be before start date</string>
+    <string name="channel_name" translatable="false">egItIGov</string>
+    <string name="channel_description" translatable="false">WeatherApp</string>
+    <string name="iti_weather_app" translatable="false">ITI WeatherApp</string>
+    <string name="every_thing_is_ok">Every thing is fine in your location , Remeber Always check weather for your safty</string>
+    <string name="watch_out_disaster">WATCH out Disaster</string>
 
 
 </resources>

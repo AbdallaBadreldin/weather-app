@@ -16,4 +16,10 @@ interface AlertDao {
     @Delete
     fun deleteAlert(alert: AlertNotification)
 
+    //workmanager staff
+    @Query("SELECT * FROM alert")
+    fun getAllAlertsForWorkManager() : List<AlertNotification>
+
+    @Query("SELECT * FROM alert WHERE startTime>= :start AND startTime <=:end ORDER BY startTime ASC   ")
+    fun getAlertsBetweenForWorkManager(start:Long ,end:Long) : List<AlertNotification>
 }

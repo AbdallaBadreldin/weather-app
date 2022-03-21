@@ -10,7 +10,7 @@
     <string name="title_home">الصفحة الرئيسية</string>
     <string name="title_welcome">مرحبا</string>
     <string name="first_time_welcome_phrase">اهلا وسهلا  - هذا التطبيق يساعدك على معرفة حالة الطقس دقيقة بدقيقة</string>
-    <string name="location_pick_instruction">نحتاج الى معرفة مكوقعك لنعرض طقس هذا الموقع</string>
+    <string name="location_pick_instruction">نحتاج الى معرفة موقعك لنعرض طقس هذا الموقع</string>
     <string name="get_weather_by_location">معرفة الوقت باستخدام الجى بى اس</string>
     <string name="get_weather_by_map">تحديد الموقع باستخدام الخريطة</string>
     <string name="get_weather_by_city">استخدام الموقع باستخدام البلد</string>
@@ -54,4 +54,19 @@
     <string name="unit_kelvin">ك°</string>
     <string name="unit_celsuis">س°</string>
     <string name="unit_fahrenhiet">ف°</string>
+    <string name="permission_granted">تم تاكيد الصلاحيات</string>
+    <string name="need_permission">نحتاج الى صلاحيات</string>
+    <string name="permission_already_granted">الصلاحيات مؤكده بالفعل</string>
+    <string name="use_another_way">اختر طريقة اخرى لتحديد موقعك</string>
+    <string name="ok">موافق</string>
+    <string name="cancel">الغاء</string>
+    <string name="enable_gps">فعل الجى بى اس او استخدم طريقة اخرى</string>
+    <string name="need_permissions_to_continue">نحتاج الى بعض الصلاحيات لنكمل الخطوات</string>
+    <string name="alarm">تنبية</string>
+    <string name="to">الى</string>
+    <string name="from">من</string>
+    <string name="save">حفظ</string>
+    <string name="cannot_choose_past">لا يمكن اختيار وقت من الماضى</string>
+    <string name="every_thing_is_ok">كل شئ بخير فى موقعك : تذكر دائما مراجعة حالة الطقس لسلامتك</string>
+    <string name="watch_out_disaster">أنتبه!! كارثة</string>
 </resources>

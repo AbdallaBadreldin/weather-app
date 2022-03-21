@@ -101,6 +101,25 @@ dependencies {
     def version ="1.0.0"
     implementation "com.google.android.material:material:$version"
 
+
+    def work_version = "2.7.1"
+
+    //WorkManager
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+    // optional - RxJava2 support
+    implementation "androidx.work:work-rxjava2:$work_version"
+    // optional - GCMNetworkManager support
+    implementation "androidx.work:work-gcm:$work_version"
+    // optional - Test helpers
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+    // optional - Multiprocess support
+    implementation "androidx.work:work-multiprocess:$work_version"
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
+
+    //gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
