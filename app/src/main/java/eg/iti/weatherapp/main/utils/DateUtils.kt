@@ -25,7 +25,7 @@ class DateUtils constructor( ) {
                 return getDateString(time, simpleDateFormatForDay)
             }
 
-        private fun getDateString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time * 1000L)
+        private fun getDateString(time: Long, simpleDateFormat:SimpleDateFormat): String = simpleDateFormat.format(time )
 
 
     }

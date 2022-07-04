@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.Constraints
-import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import eg.iti.weatherapp.R
@@ -21,12 +20,10 @@ import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
 import eg.iti.weatherapp.main.ui.location.toast
-import eg.iti.weatherapp.main.ui.workmanager.NotificationWorker
 import eg.iti.weatherapp.main.ui.workmanager.OneTimeNotificationWorker
 import eg.iti.weatherapp.main.utils.DateUtils
 import java.sql.Timestamp
 import java.util.*
-import kotlin.math.log
 
 
 class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener,
@@ -105,7 +102,7 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
         }
 
         setTimeToText(pickedTimeInString)
-        currentTimeInTimestamp = System.currentTimeMillis() / 1000
+        currentTimeInTimestamp = System.currentTimeMillis() / 1
         startTime.text = DateUtils.convertAlertTime(currentTimeInTimestamp, Locale.getDefault())
         startDate.text = DateUtils.convertAlertDate(currentTimeInTimestamp, Locale.getDefault())
         endTime.text = DateUtils.convertAlertTime(currentTimeInTimestamp, Locale.getDefault())
@@ -117,16 +114,16 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
 
         saveBtn.setOnClickListener {
 
-            if (start <= end) {
+            if (start < end) {
                 viewModel.insertData(AlertNotification(0, start, end, true), requireContext())
 //                WorkManager.getInstance(requireContext()).cancelAllWork()
 
-                Log.v("WORKER","TIMES")
-                Log.v("WORKER",start.toString())
-                Log.v("WORKER",(System.currentTimeMillis()/1000).toString())
+                Log.v("WORKER", "TIMES")
+                Log.v("WORKER", start.toString())
+                Log.v("WORKER", (System.currentTimeMillis() / 1).toString())
 
-                startWorkManager(  System.currentTimeMillis()/1000- start     )
-                firstTime=true
+                startWorkManager(start - System.currentTimeMillis() / 1)
+                firstTime = true
                 dismiss()
             } else
                 context?.toast(getString(R.string.end_time_cannot_be_before_start))
@@ -145,9 +142,9 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
         datePickerDialog.show()
     }
 
-    fun startWorkManager(delayTime:Long) {
-        Log.v("WORKER",delayTime.toString())
-        val workManager = WorkManager.getInstance(activity?.applicationContext!!)
+    fun startWorkManager(delayTime: Long) {
+        Log.v("WORKER", delayTime.toString())
+        val workManager = WorkManager.getInstance(requireContext())
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .setRequiresCharging(false)
@@ -156,7 +153,8 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
 //    val data = Data.Builder()
 //        data.putString(ENDPOINT_REQUEST, endPoint)
         val work = OneTimeWorkRequestBuilder<OneTimeNotificationWorker>()
-            .setInitialDelay(delayTime, java.util.concurrent.TimeUnit.SECONDS)
+            //  .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .setInitialDelay(delayTime, java.util.concurrent.TimeUnit.MILLISECONDS)
             .setConstraints(constraints)
 //        .setInputData(data.build())
             .build()
@@ -164,14 +162,19 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val calendar: Calendar = Calendar.getInstance()
+
         myDay = dayOfMonth
         myYear = year
         myMonth = month
-        val calendar: Calendar = Calendar.getInstance()
-        hour = calendar.get(Calendar.HOUR_OF_DAY)
+        if (calendar.get(Calendar.AM) == 0)
+            hour = calendar.get(Calendar.HOUR) + 12
+        else
+            hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
         val timePickerDialog =
             TimePickerDialog(requireContext(), this@AlertDialogFragment, hour, minute, false)
+
         timePickerDialog.show()
     }
 
@@ -181,20 +184,20 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
         myHour = hourOfDay
         myMinute = minute
         pickedTimeInString =
-            Timestamp(year - 1900, myMonth, myDay, myHour, myMinute, 0, 0).time /1000
+            Timestamp(year - 1900, myMonth, myDay, myHour, myMinute, 1, 1).time / 1
 
         setTimeToText(pickedTimeInString)
     }
 
     var start: Long = 0
     var end: Long = 0
-    var firstTime:Boolean = true
+    var firstTime: Boolean = true
     private fun setTimeToText(pickedTimeInString: Long) {    //1647   729045
 
-        if (!firstTime && !isEnd && pickedTimeInString >= currentTimeInTimestamp)
-        {  context?.toast(getString(R.string.cannot_choose_past))
-        firstTime=false}
-        else {
+        if (!firstTime && !isEnd && pickedTimeInString >= currentTimeInTimestamp) {
+            context?.toast(getString(R.string.cannot_choose_past))
+            firstTime = false
+        } else {
             if (isEnd) {
                 end = this.pickedTimeInString
                 endTime.text = DateUtils.convertAlertTime(end, Locale.getDefault())
