@@ -19,7 +19,6 @@ interface WeatherDao {
     @Query("DELETE FROM WeatherResponse")
     fun clearAllWeatherResponse()
 
-
     @Delete
     fun delete(weather: WeatherResponse)
 

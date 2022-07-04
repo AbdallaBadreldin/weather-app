@@ -50,7 +50,7 @@ class WelcomeFragment : Fragment() {
         }
 
 //        WorkManager.getInstance(requireContext()).cancelAllWork()
-        startWorkManager()
+//        startWorkManager()
 
 //        val blurRequest = OneTimeWorkRequestBuilder<NotificationWorker>()
 //            .build()

@@ -125,7 +125,8 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
                 Log.v("WORKER",start.toString())
                 Log.v("WORKER",(System.currentTimeMillis()/1000).toString())
 
-                startWorkManager(  start - System.currentTimeMillis()/1000   )
+                startWorkManager(  System.currentTimeMillis()/1000- start     )
+                firstTime=true
                 dismiss()
             } else
                 context?.toast(getString(R.string.end_time_cannot_be_before_start))
@@ -187,22 +188,24 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
 
     var start: Long = 0
     var end: Long = 0
-    fun setTimeToText(pickedTimeInString: Long) {    //1647   729045
+    var firstTime:Boolean = true
+    private fun setTimeToText(pickedTimeInString: Long) {    //1647   729045
 
-//        if (isEnd == false && pickedTimeInString >= currentTimeInTimestamp)
-//            context?.toast(getString(R.string.cannot_choose_past))
-//        else {
-            if (isEnd == true) {
+        if (!firstTime && !isEnd && pickedTimeInString >= currentTimeInTimestamp)
+        {  context?.toast(getString(R.string.cannot_choose_past))
+        firstTime=false}
+        else {
+            if (isEnd) {
                 end = this.pickedTimeInString
                 endTime.text = DateUtils.convertAlertTime(end, Locale.getDefault())
                 endDate.text = DateUtils.convertAlertDate(end, Locale.getDefault())
             }
-            if (isEnd == false) {
+            if (!isEnd) {
                 start = this.pickedTimeInString
                 startTime.text = DateUtils.convertAlertTime(start, Locale.getDefault())
                 startDate.text = DateUtils.convertAlertDate(start, Locale.getDefault())
             }
-//        }
+        }
 
     }
 

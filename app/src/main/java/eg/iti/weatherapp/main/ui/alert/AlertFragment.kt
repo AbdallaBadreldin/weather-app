@@ -5,19 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import eg.iti.weatherapp.R
-import eg.iti.weatherapp.main.data.model.Location
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
 import eg.iti.weatherapp.main.ui.base.MyViewModelFactory
-import eg.iti.weatherapp.main.ui.favouritemap.FavouriteMapViewModel
-import eg.iti.weatherapp.main.utils.LocaleUtil
 
 class AlertFragment : Fragment() {
 
