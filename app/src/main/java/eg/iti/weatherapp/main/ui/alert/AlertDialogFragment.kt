@@ -114,7 +114,7 @@ class AlertDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener
 
         saveBtn.setOnClickListener {
 
-            if (start < end) {
+            if (start < end && start - System.currentTimeMillis() > 5 ) {
                 viewModel.insertData(AlertNotification(0, start, end, true), requireContext())
 //                WorkManager.getInstance(requireContext()).cancelAllWork()
 

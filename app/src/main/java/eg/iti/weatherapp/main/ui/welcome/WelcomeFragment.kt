@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import androidx.work.*
 
 import eg.iti.weatherapp.R
@@ -48,6 +50,11 @@ class WelcomeFragment : Fragment() {
             val navController = navHostFragment.findNavController()
             navController.navigate(R.id.navigation_pickLocation)  //can be action
         }
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        if(!sharedPreferences.getString(getString(R.string.preference_longitude),"non").equals("non")) {
+            findNavController().navigate(ActionOnlyNavDirections(R.id.action_welcome_to_home))
+        }
 
 //        WorkManager.getInstance(requireContext()).cancelAllWork()
 //        startWorkManager()
@@ -65,6 +72,8 @@ class WelcomeFragment : Fragment() {
 
 
 //        Locale.getDefault()
+
+
         return root
     }
 

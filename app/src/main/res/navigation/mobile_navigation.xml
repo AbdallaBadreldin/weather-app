@@ -10,14 +10,14 @@
         android:id="@+id/navigation_welcome"
         android:name="eg.iti.weatherapp.main.ui.welcome.WelcomeFragment"
         android:label="@string/title_welcome"
-        tools:layout="@layout/welcome_fragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_welcome_to_picklocation"-->
-<!--            app:destination="@id/navigation_pickLocation"-->
-<!--            app:launchSingleTop="true"-->
-<!--            app:popUpTo="@id/navigation_welcome"-->
-<!--            app:popUpToInclusive="true" />-->
-<!--    </fragment>-->
+        tools:layout="@layout/welcome_fragment" >
+        <action
+            android:id="@+id/action_welcome_to_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_welcome"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_pickLocation"

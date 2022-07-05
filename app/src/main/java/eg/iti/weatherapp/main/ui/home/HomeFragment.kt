@@ -180,7 +180,7 @@ class HomeFragment : Fragment() {
 
         txtDt.text =
             it?.current?.dayTime?.let { it1 ->
-                DateUtils.convertDate(it1.toLong(),Locale.getDefault())
+                DateUtils.convertDate(it1.toLong()*1000,Locale.getDefault())
             }
         imgWeatherIcon.setImageResource(pickPhoto(it.current.weather[0].icon))
         txtWeather_discription.text = it?.current!!.weather[0].description

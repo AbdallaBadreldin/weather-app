@@ -8,10 +8,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,36 +17,34 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ActionOnlyNavDirections
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.CancellationTokenSource
 import eg.iti.weatherapp.R
 import eg.iti.weatherapp.databinding.PickLocationFragmentBinding
 import eg.iti.weatherapp.main.utils.ManagePermissions
-import kotlinx.coroutines.CancellationException
 
 class PickLocationFragment : Fragment() {
 
     private var _binding: PickLocationFragmentBinding? = null
-    private val binding get() =_binding!!
+    private val binding get() = _binding!!
     private lateinit var viewModel: PickLocationViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var sharedPreferences: SharedPreferences
-    lateinit var mLocationRequest:LocationRequest
+    lateinit var mLocationRequest: LocationRequest
+
     companion object {
         fun newInstance() = PickLocationFragment()
     }
 
-    lateinit var btnGps:Button
-    lateinit var btnMap:Button
-    lateinit var btnCity:Button
-lateinit var long :String
-lateinit var lati:String
+    lateinit var btnGps: Button
+    lateinit var btnMap: Button
+    lateinit var btnCity: Button
+    lateinit var long: String
+    lateinit var lati: String
     private val PermissionsRequestCode = 123
     private lateinit var managePermissions: ManagePermissions
     override fun onCreateView(
@@ -57,22 +53,23 @@ lateinit var lati:String
     ): View? {
 
         //shared preferences
-       sharedPreferences= PreferenceManager.getDefaultSharedPreferences(requireContext())
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         viewModel = ViewModelProvider(this).get(PickLocationViewModel::class.java)
         // TODO: Use the ViewModel seems to use it for shared prefrences with location data getter and setter but this will be latter
 
-        _binding = PickLocationFragmentBinding.inflate(inflater,container,false)
+        _binding = PickLocationFragmentBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().application)
+        fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity().application)
 
         btnGps = binding.gpsLocation
         btnMap = binding.mapLocation
         btnCity = binding.cityLocation
 
-        var long:String
-        var lat:String
+        var long: String
+        var lat: String
         // Initialize a list of required permissions to request runtime
         val list = listOf<String>(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -80,7 +77,7 @@ lateinit var lati:String
         )
 
         // Initialize a new instance of ManagePermissions class
-        managePermissions = ManagePermissions(requireActivity(),list,PermissionsRequestCode)
+        managePermissions = ManagePermissions(requireActivity(), list, PermissionsRequestCode)
 
 
         btnGps.setOnClickListener {
@@ -91,7 +88,7 @@ lateinit var lati:String
         }
 
         btnMap.setOnClickListener {
-            findNavController().navigate(ActionOnlyNavDirections(R.id.navigation_map) ) //for test purposal only
+            findNavController().navigate(ActionOnlyNavDirections(R.id.navigation_map)) //for test purposal only
         }
 
         btnCity.setOnClickListener {
@@ -99,20 +96,6 @@ lateinit var lati:String
         }
 
         return root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-//        requestLocationPermission()
-
-//        checkWetherPermissionGrantedOrNot()
-
     }
 
     private fun getLastKnownLocation() {
@@ -136,30 +119,37 @@ lateinit var lati:String
         }
 //       var loco= fusedLocationClient.getCurrentLocation()
         fusedLocationClient.flushLocations()
-        if(isLocationEnabled()){
-requestNewLocationData()
-        fusedLocationClient!!.requestLocationUpdates(
-            mLocationRequest, mLocationCallback,
-            Looper.myLooper()!!
-        )
+        if (isLocationEnabled()) {
+            requestNewLocationData()
+            fusedLocationClient.requestLocationUpdates(
+                mLocationRequest, mLocationCallback,
+                Looper.myLooper()!!
+            )
 
 
 
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
 //                 Got last known location. In some rare situations this can be null.
-            //here I am going to save shared Preference and navigate to next screen where api retrofit :)
-            val editor:SharedPreferences.Editor =  sharedPreferences.edit()
+                //here I am going to save shared Preference and navigate to next screen where api retrofit :)
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-            editor.putString(getString(R.string.preference_longitude), location?.longitude.toString())
-            editor.putString(getString(R.string.preference_alatitude), location?.latitude.toString())
-            editor.apply()
-            editor.commit()
-            findNavController().navigate(ActionOnlyNavDirections(R.id.action_pick_to_home) ) //for test purposal only
-        }}
-        else
+                editor.putString(
+                    getString(R.string.preference_longitude),
+                    location?.longitude.toString()
+                )
+                editor.putString(
+                    getString(R.string.preference_alatitude),
+                    location?.latitude.toString()
+                )
+                editor.apply()
+                editor.commit()
+                findNavController().navigate(ActionOnlyNavDirections(R.id.action_pick_to_home)) //for test purposal only
+            }
+        } else
             context?.toast(getString(R.string.enable_gps))
     }
+
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var location: Location = locationResult.lastLocation
@@ -182,13 +172,15 @@ requestNewLocationData()
         mLocationRequest.numUpdates = 1
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        fusedLocationClient!!.requestLocationUpdates(
+        fusedLocationClient.requestLocationUpdates(
             mLocationRequest, mLocationCallback,
             Looper.myLooper()!!
         )
     }
+
     private fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var locationManager: LocationManager =
+            context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
@@ -199,24 +191,28 @@ requestNewLocationData()
         _binding = null
     }
 
-    fun requestLocationPermission() = registerForActivityResult(ActivityResultContracts.RequestPermission())
-    { isGranted: Boolean -> if (isGranted) {
-        getLastKnownLocation()
+    fun requestLocationPermission() =
+        registerForActivityResult(ActivityResultContracts.RequestPermission())
+        { isGranted: Boolean ->
+            if (isGranted) {
+                getLastKnownLocation()
 
-    } else {
-
-
-        // Explain to the user that the feature is unavailable because the
-        // features requires a permission that the user has denied. At the
-        // same time, respect the user's decision. Don't link to system
-        // settings in an effort to convince the user to change their
-        // decision.
-    }
-    }
+            } else {
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                            grantResults: IntArray) {
+                // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
+        }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         when (requestCode) {
             PermissionsRequestCode -> {
                 val isPermissionsGranted = managePermissions
@@ -225,16 +221,19 @@ requestNewLocationData()
                 if (isPermissionsGranted) {
                     getLastKnownLocation()
 
-                    Toast.makeText(context, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        getString(R.string.permission_granted),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(context, getString(R.string.need_permission), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.need_permission), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 return
             }
         }
     }
-
-
 
 
     /* override fun onRequestPermissionsResult(requestCode: Int,
@@ -268,6 +267,7 @@ requestNewLocationData()
 
 
 }
+
 // Extension function to show toast message
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

@@ -45,8 +45,11 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
                 context = applicationContext
             )
 
+            Log.v("WORKERINSIDE", userReminders.toString())
+            Log.v("WORKERINSIDE", dataInsideDB.toString())
 
         if (dataInsideDB == null) {
+            Log.v("WORKERINSIDE", "no data insdide database")
             createNotification(
                 applicationContext.getString(R.string.every_thing_is_ok),
                 applicationContext.getString(R.string.iti_weather_app)
@@ -54,7 +57,8 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
             return Result.success()
         }
 
-        if (dataInsideDB.isNullOrEmpty()) {
+        if (dataInsideDB.isEmpty()) {
+            Log.v("WORKERINSIDE", "database is null or empty")
             createNotification(
                 applicationContext.getString(R.string.every_thing_is_ok),
                 applicationContext.getString(R.string.iti_weather_app)
@@ -64,6 +68,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
 
 
         if (dataInsideDB[0].alerts == null) {
+            Log.v("WORKERINSIDE", "no alerts inside database")
             createNotification(
                 applicationContext.getString(R.string.every_thing_is_ok),
                 applicationContext.getString(R.string.iti_weather_app)
@@ -72,6 +77,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
         }
 
         if (dataInsideDB.size == 0) {
+            Log.v("WORKERINSIDE", "database == 0")
             createNotification(
                 applicationContext.getString(R.string.every_thing_is_ok),
                 applicationContext.getString(R.string.iti_weather_app)
@@ -80,6 +86,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
         }
 
         if (dataInsideDB[0].alerts.size == 0) {
+            Log.v("WORKERINSIDE", "database alerts ==0")
             createNotification(
                 applicationContext.getString(R.string.every_thing_is_ok),
                 applicationContext.getString(R.string.iti_weather_app)
@@ -88,7 +95,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
         }
 
         if (dataInsideDB[0].alerts.isNullOrEmpty()) {
-
+            Log.v("WORKERINSIDE", "no data inside alerts")
             createNotification(
                 dataInsideDB[0].alerts[0].description,
                 applicationContext.getString(R.string.iti_weather_app)
@@ -98,7 +105,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
         }
 
     }
-//Log.v("WORKER","ONE TIME WORKER")
+Log.v("WORKER","ONE TIME WORKER")
 
 //        WorkManager.getInstance(applicationContext).cancelAllWork()
         return Result.success()
@@ -109,6 +116,7 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
 
     //old version
     private fun createNotificationChannel() {
+        Log.v("WORKERINSIDE", "created channed")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = applicationContext.getString(R.string.channel_name)
             val descriptionText = applicationContext.getString(R.string.channel_description)

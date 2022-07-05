@@ -87,6 +87,8 @@
     <string name="iti_weather_app" translatable="false">ITI WeatherApp</string>
     <string name="every_thing_is_ok">Every thing is fine in your location , Remeber Always check weather for your safty</string>
     <string name="watch_out_disaster">WATCH out Disaster</string>
+    <string name="first_time" translatable="false">first</string>
+    <string name="preference_first">first</string>
 
 
 </resources>
