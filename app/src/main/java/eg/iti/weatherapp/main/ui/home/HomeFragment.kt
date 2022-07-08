@@ -144,7 +144,7 @@ class HomeFragment : Fragment() {
     }
 
     fun fetchTimelineAsync() {
-        viewModel.getCurrentWeather(requireActivity())
+        viewModel.getCurrentWeather(context = requireContext())
 
         viewModel.currentWeather.observe(requireActivity()) {
             setDataIntoLayout(it)
