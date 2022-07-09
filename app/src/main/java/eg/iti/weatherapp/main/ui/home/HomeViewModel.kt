@@ -9,6 +9,9 @@ import androidx.preference.PreferenceManager
 import eg.iti.weatherapp.R
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.repository.MainRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,11 +48,9 @@ class HomeViewModel(private val mainRepository: MainRepository) : ViewModel() {
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>
             ) {
-                runBlocking {
                     mainRepository.clearAllWeatherResponseData(context)
                     mainRepository.insertWeatherResponseToDatabase(response.body()!!, context)
                     currentWeather.postValue(response.body())
-                }
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {

@@ -9,17 +9,13 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import eg.iti.weatherapp.R
-import eg.iti.weatherapp.main.data.model.AlertNotification
-import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.repository.MainRepository
 import eg.iti.weatherapp.main.data.retrofit.RemoteSource
 import eg.iti.weatherapp.main.data.room.LocalSource
 import eg.iti.weatherapp.main.ui.welcome.WelcomeFragment
-
 
 
 class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParameters) :
@@ -48,70 +44,68 @@ class OneTimeNotificationWorker(appContext: Context, workerParams: WorkerParamet
             Log.v("WORKERINSIDE", userReminders.toString())
             Log.v("WORKERINSIDE", dataInsideDB.toString())
 
-        if (dataInsideDB == null) {
-            Log.v("WORKERINSIDE", "no data insdide database")
-            createNotification(
-                applicationContext.getString(R.string.every_thing_is_ok),
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
+            if (dataInsideDB == null) {
+                Log.v("WORKERINSIDE", "no data insdide database")
+                createNotification(
+                    applicationContext.getString(R.string.every_thing_is_ok),
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+            }
+
+            if (dataInsideDB.isEmpty()) {
+                Log.v("WORKERINSIDE", "database is null or empty")
+                createNotification(
+                    applicationContext.getString(R.string.every_thing_is_ok),
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+            }
+
+
+            if (dataInsideDB[0].alerts == null) {
+                Log.v("WORKERINSIDE", "no alerts inside database")
+                createNotification(
+                    applicationContext.getString(R.string.every_thing_is_ok),
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+            }
+
+            if (dataInsideDB.size == 0) {
+                Log.v("WORKERINSIDE", "database == 0")
+                createNotification(
+                    applicationContext.getString(R.string.every_thing_is_ok),
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+            }
+
+            if (dataInsideDB[0].alerts!!.size == 0) {
+                Log.v("WORKERINSIDE", "database alerts ==0")
+                createNotification(
+                    applicationContext.getString(R.string.every_thing_is_ok),
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+            }
+
+            if (dataInsideDB[0].alerts.isNullOrEmpty()) {
+                Log.v("WORKERINSIDE", "no data inside alerts")
+                createNotification(
+                    dataInsideDB[0].alerts?.get(0)!!.description,
+                    applicationContext.getString(R.string.iti_weather_app)
+                )
+                return Result.success()
+
+            }
+
         }
-
-        if (dataInsideDB.isEmpty()) {
-            Log.v("WORKERINSIDE", "database is null or empty")
-            createNotification(
-                applicationContext.getString(R.string.every_thing_is_ok),
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
-        }
-
-
-        if (dataInsideDB[0].alerts == null) {
-            Log.v("WORKERINSIDE", "no alerts inside database")
-            createNotification(
-                applicationContext.getString(R.string.every_thing_is_ok),
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
-        }
-
-        if (dataInsideDB.size == 0) {
-            Log.v("WORKERINSIDE", "database == 0")
-            createNotification(
-                applicationContext.getString(R.string.every_thing_is_ok),
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
-        }
-
-        if (dataInsideDB[0].alerts.size == 0) {
-            Log.v("WORKERINSIDE", "database alerts ==0")
-            createNotification(
-                applicationContext.getString(R.string.every_thing_is_ok),
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
-        }
-
-        if (dataInsideDB[0].alerts.isNullOrEmpty()) {
-            Log.v("WORKERINSIDE", "no data inside alerts")
-            createNotification(
-                dataInsideDB[0].alerts[0].description,
-                applicationContext.getString(R.string.iti_weather_app)
-            )
-            return Result.success()
-
-        }
-
-    }
-Log.v("WORKER","ONE TIME WORKER")
+        Log.v("WORKER", "ONE TIME WORKER")
 
 //        WorkManager.getInstance(applicationContext).cancelAllWork()
         return Result.success()
     }
-
-
 
 
     //old version

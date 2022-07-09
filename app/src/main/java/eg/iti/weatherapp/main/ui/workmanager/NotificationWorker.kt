@@ -108,8 +108,8 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters) :
 
             //next step is to call hard one time notification
                 if(dataInsideDB.isNullOrEmpty()){
-                    for (alert in dataInsideDB[0].alerts) {
-                        if (alert.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert.end) {
+                    for (alert in dataInsideDB[0].alerts!!) {
+                        if (alert!!.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert!!.end) {
                     Log.v("WORKER","FROM INSIDE SoON ALERTS   inside if statemnet ")
                     createNotification(
                         applicationContext.getString(R.string.every_thing_is_ok),
@@ -119,8 +119,8 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters) :
                 }
                 else{
                     Log.v("WORKER","FROM INSIDE DATA NoT NULL")
-                    for (alert in dataInsideDB[0].alerts) {
-                        if (alert.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert.end) {
+                    for (alert in dataInsideDB[0].alerts!!) {
+                        if (alert!!.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert!!.end) {
                             Log.v("WORKER","THERE ARE DATA IN BETWEEN WORK MANAGER")
                             createNotification(
                                 alert.description,
@@ -138,9 +138,9 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters) :
         }
 
 
-        if (dataInsideDB[0].alerts.size >= 1) {
-            for (alert in dataInsideDB[0].alerts) {
-                if (alert.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert.end) {
+        if (dataInsideDB[0].alerts!!.size >= 1) {
+            for (alert in dataInsideDB[0].alerts!!) {
+                if (alert!!.start <= System.currentTimeMillis() && System.currentTimeMillis() <= alert.end) {
                     createNotification(
                         alert.description,
                         applicationContext.getString(R.string.watch_out_disaster)

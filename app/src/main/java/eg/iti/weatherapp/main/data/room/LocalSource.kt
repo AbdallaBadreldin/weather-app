@@ -7,6 +7,7 @@ import eg.iti.weatherapp.main.data.model.Location
 import eg.iti.weatherapp.main.data.model.WeatherResponse
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.WeatherDataBase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -44,16 +45,16 @@ class LocalSource : LocalSourceInterface {
     }
 
     override fun insertWeatherResponse(weatherResponse: WeatherResponse, context: Context) {
-        weatherDataBase = initializeDB(context = context)
         CoroutineScope(IO).launch {
+            weatherDataBase = initializeDB(context = context)
             val weatherDetails = weatherResponse
             weatherDataBase!!.weatherDao().insertWeatherResponse(weatherDetails)
         }
     }
 
     override fun deleteAllWeatherResponseData(context: Context) {
-        weatherDataBase = initializeDB(context = context)
         CoroutineScope(IO).launch {
+            weatherDataBase = initializeDB(context = context)
             weatherDataBase!!.weatherDao().clearAllWeatherResponse()
         }
     }

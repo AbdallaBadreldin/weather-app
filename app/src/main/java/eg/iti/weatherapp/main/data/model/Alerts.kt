@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.Converters
 
-data class Alert(
+data class Alerts(
     val description: String,
     val end: Long,
     val event: String,

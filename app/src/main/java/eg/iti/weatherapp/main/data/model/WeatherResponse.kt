@@ -1,10 +1,7 @@
 package eg.iti.weatherapp.main.data.model
 
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import eg.iti.weatherapp.main.data.room.WeatherResponseDao.Converters
@@ -43,6 +40,6 @@ data class WeatherResponse constructor(
     @TypeConverters(Converters::class)
     @ColumnInfo(name = "alerts")
     @SerializedName("alerts")
-    val alerts: List<Alert>
+    val alerts: List<Alerts?>?
 
 ) : Serializable
