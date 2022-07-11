@@ -51,7 +51,7 @@ class HourlyAdapter : RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var hourlyDetails = hourlys[position]
         holder.time.text =
-            DateUtils.convertHour(hourlyDetails.dt.toLong(), Locale.getDefault()).toString()
+            DateUtils.convertHour(hourlyDetails.dt.toLong()*1000, Locale.getDefault())
         holder.temp.text = LocaleUtil.translateEnglishToArabic(convertTempAsSharedPreferences(hourlyDetails.temp), context)
         holder.image.setImageResource(pickPhoto(hourlyDetails.weather[0].icon)) // no photos yet
     }
