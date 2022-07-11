@@ -2,16 +2,20 @@ package eg.iti.weatherapp.main.ui.home
 
 
 import android.R
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.layoutDirection
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -74,6 +78,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         viewModel = ViewModelProvider(
             this, MyViewModelFactory(
@@ -248,10 +253,10 @@ class HomeFragment : Fragment() {
             getString(eg.iti.weatherapp.R.string.pref_meterPerSecond)
         ).toString()
         when (speedo) {
-            getString(eg.iti.weatherapp.R.string.pref_meterPerSecond).toString() -> return (speed + getString(
+            getString(eg.iti.weatherapp.R.string.pref_meterPerSecond) -> return (speed + getString(
                 eg.iti.weatherapp.R.string.meter_per_sec
             ))
-            getString(eg.iti.weatherapp.R.string.pref_milePerHour).toString() -> return ((speed.toDouble() * 2.23694).toBigDecimal(
+            getString(eg.iti.weatherapp.R.string.pref_milePerHour) -> return ((speed.toDouble() * 2.23694).toBigDecimal(
                 MathContext(2)
             ).toString() + getString(eg.iti.weatherapp.R.string.mile_per_hour))
             else -> return (speed + getString(eg.iti.weatherapp.R.string.meter_per_sec)).toString()
@@ -300,7 +305,6 @@ class HomeFragment : Fragment() {
         val navView: NavigationView = binding.homeNavView
 
         val navController = this.findNavController()
-
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 eg.iti.weatherapp.R.id.navigation_about,
@@ -311,12 +315,24 @@ class HomeFragment : Fragment() {
             ), drawerLayout
         )
         setupActionBarWithNavController(
-            context as AppCompatActivity,
+            activity as AppCompatActivity,
             navController,
             appBarConfiguration
         )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            binding.homeDrawerLayout.hashCode()-> {
+        binding.homeDrawerLayout.openDrawer(GravityCompat.START)
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        return true
+//            }
+//        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

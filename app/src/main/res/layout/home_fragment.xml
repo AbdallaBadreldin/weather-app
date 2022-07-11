@@ -8,12 +8,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
-        android:id="@+id/home_app_bar_main"
-        layout="@layout/home_app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/homeSwipeContainer"
         android:layout_width="match_parent"
@@ -101,16 +95,16 @@
                                 android:textSize="@dimen/home_text_size_bigHeaders" />
 
                             <ImageView
-                                android:foregroundGravity="bottom"
                                 android:id="@+id/home_current_weatherIcon"
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="16dp"
+                                android:baselineAlignBottom="true"
+                                android:foregroundGravity="bottom"
                                 tools:layout_editor_absoluteX="128dp"
                                 tools:layout_editor_absoluteY="217dp"
-                                tools:src="@tools:sample/avatars"
-                                android:baselineAlignBottom="true"/>
+                                tools:src="@tools:sample/avatars" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -365,6 +359,12 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <include
+        android:id="@+id/home_app_bar_main"
+        layout="@layout/home_app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/home_nav_view"
         android:layout_width="wrap_content"
@@ -373,6 +373,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/home_nav_header_main"
         app:menu="@menu/home_nav_view" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
