@@ -35,7 +35,6 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
             )
         }
 
-
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -46,7 +45,6 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
          * user has installed Google Play services and returned to the app.
          */
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,10 +73,7 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
         return view
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-
-    }
-
+    override fun onMapReady(googleMap: GoogleMap) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

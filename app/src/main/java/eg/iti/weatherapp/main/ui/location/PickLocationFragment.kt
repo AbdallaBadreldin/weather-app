@@ -126,9 +126,6 @@ class PickLocationFragment : Fragment() {
                 Looper.myLooper()!!
             )
 
-
-
-
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
 //                 Got last known location. In some rare situations this can be null.
                 //here I am going to save shared Preference and navigate to next screen where api retrofit :)
@@ -198,8 +195,6 @@ class PickLocationFragment : Fragment() {
                 getLastKnownLocation()
 
             } else {
-
-
                 // Explain to the user that the feature is unavailable because the
                 // features requires a permission that the user has denied. At the
                 // same time, respect the user's decision. Don't link to system
