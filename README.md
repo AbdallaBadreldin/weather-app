@@ -6,18 +6,24 @@ User can pick up more than one location.
 
 # Used Topics
 
-Shared preference 
-Room
-WorkManager
-Notification
-Google Maps
-Localization
-Location
-Navigation
+1) [SharedPreferences](https://developer.android.com/training/data-storage/shared-preferences)
+2) [Room](https://developer.android.com/codelabs/android-room-with-a-view-kotlin#0)
+3) [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager?gclid=CjwKCAiAkrWdBhBkEiwAZ9cdcFB0Mq8Eb_FtN8ZJFG-26ztOcnriBMA4Y2ZgXa0A3mK3dVDfcVewOxoCGCgQAvD_BwE&gclsrc=aw.ds)
+4) [Notifications](https://developer.android.com/develop/ui/views/notifications)
+5) [Google Maps](https://developers.google.com/maps/documentation/android-sdk/start)
+6) [Localization](https://developer.android.com/guide/topics/resources/localization)
+7) [Location](https://developer.android.com/training/location)
+8) [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started)
+9) [Retrofit](https://www.geeksforgeeks.org/android-build-a-movie-app-using-retrofit-and-mvvm-architecture-with-kotlin/)
+10) [Coroutines](https://developer.android.com/kotlin/coroutines?gclid=CjwKCAiAkrWdBhBkEiwAZ9cdcOlncfcuQ4tQaguy8pMe4NX3YrSB2qnJVinjr72DYhv3E4GK3TGngRoC1lwQAvD_BwE&gclsrc=aw.ds)
+11) [Glide](https://github.com/bumptech/glide)
+12) [Swipe Refresh Layout](https://stackoverflow.com/questions/23014846/how-to-use-the-swiperefreshlayout)
+
 
 ### To understand project's code you must strongly understand
+## MVVM
+# [The Android Architecture Components](https://www.section.io/engineering-education/implementing-mvvm-architecture-in-android-using-kotlin/)
 
-MVVM
 
 # Screenshots
 
