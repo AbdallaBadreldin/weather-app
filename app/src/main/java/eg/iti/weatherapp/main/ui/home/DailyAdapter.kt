@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import eg.iti.weatherapp.R
 import eg.iti.weatherapp.databinding.CustomRowDailyBinding
-import eg.iti.weatherapp.main.data.model.Hourly
-import eg.iti.weatherapp.main.ui.home.DailyAdapter
 import eg.iti.weatherapp.main.utils.LocaleUtil
 import java.math.MathContext
 

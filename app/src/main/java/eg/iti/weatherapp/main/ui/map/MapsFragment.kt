@@ -66,8 +66,8 @@ class MapsFragment : Fragment(),  OnMapReadyCallback {
                 latLong?.longitude.toString()
             )
             editor.putString(getString(R.string.preference_alatitude), latLong?.latitude.toString())
-            editor.apply()
             editor.commit()
+
             findNavController().navigate(ActionOnlyNavDirections(R.id.action_map_to_home)) //for test purposal only
         }
         return view

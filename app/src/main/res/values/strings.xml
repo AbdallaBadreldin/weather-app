@@ -4,7 +4,7 @@
     <string name="title_welcome">Welcome</string>
     <string name="first_time_welcome_phrase">welcome, this application helps you to know the weather minute by minute</string>
     <string name="next">Next</string>
-    <string name="location_pick_instruction">you will need to specify your location so as show the weather of your location</string>
+    <string name="location_pick_instruction">We need to know your location to show it\'s weather</string>
     <string name="get_weather_by_location">get weather by GPS</string>
     <string name="get_weather_by_map">get weather by map</string>
     <string name="get_weather_by_city">get weather by city</string>
@@ -70,7 +70,7 @@
     <string name="need_permission">need permission</string>
     <string name="permission_already_granted">permission already granted</string>
     <string name="use_another_way">use another way to fetch for weather</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="need_permissions_to_continue">Some permissions are required to continue</string>
     <string name="enable_gps">Enable gps or use another way</string>
